@@ -1,0 +1,84 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-validation:
+    name: PR 验证
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 生成 Prisma Client
+        run: npm run db:generate
+
+      - name: 运行类型检查
+        run: npx tsc --noEmit
+
+      - name: 运行测试
+        run: npm test -- --run
+
+      - name: 运行构建
+        run: npm run build
+        env:
+          DATABASE_URL: file:./dev.db
+
+      - name: PR 大小检查
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            const totalChanges = files.reduce((acc, file) => acc + file.changes, 0);
+
+            if (totalChanges > 500) {
+              core.warning(`此 PR 包含 ${totalChanges} 行变更，建议拆分成多个小 PR`);
+            }
+
+  comment-coverage:
+    name: 测试覆盖率报告
+    runs-on: ubuntu-latest
+    needs: pr-validation
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 生成 Prisma Client
+        run: npm run db:generate
+
+      - name: 生成覆盖率报告
+        run: npm run test:coverage
+
+      - name: 覆盖率报告注释
+        uses: romeovs/lcov-reporter-action@v0.3.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          lcov-file: ./coverage/lcov.info
+          delete-old-comments: true
