@@ -70,7 +70,10 @@ export const postRouter = router({
     )
     .mutation(async ({ input }) => {
       return await prisma.post.create({
-        data: input,
+        data: {
+          ...input,
+          published: true, // 默认发布
+        },
       });
     }),
 
