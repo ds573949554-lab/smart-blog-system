@@ -51,15 +51,42 @@ export default function NewPostPage() {
   // 自动生成 slug
   const title = watch('title');
   const generateSlug = () => {
-    if (title) {
-      const slug = title
-        .toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .trim();
-      setValue('slug', slug);
+    if (!title) return;
+
+    // 简单的中文转拼音映射（常用字）
+    const pinyinMap: Record<string, string> = {
+      '粤': 'yue', '语': 'yu', '是': 'shi', '最': 'zui', '好': 'hao',
+      '测': 'ce', '试': 'shi', '文': 'wen', '章': 'zhang',
+      '欢': 'huan', '迎': 'ying', '使': 'shi', '用': 'yong',
+      '系': 'xi', '统': 'tong', '博': 'bo', '客': 'ke',
+      '新': 'xin', '闻': 'wen', '技': 'ji', '术': 'shu',
+    };
+
+    // 转换中文为拼音
+    let result = '';
+    for (const char of title) {
+      if (pinyinMap[char]) {
+        result += pinyinMap[char] + '-';
+      } else if (/[a-zA-Z0-9]/.test(char)) {
+        result += char;
+      } else if (char === ' ') {
+        result += '-';
+      }
     }
+
+    // 如果转换后为空（包含未映射的中文），使用时间戳
+    if (!result || result.replace(/-/g, '').length === 0) {
+      result = `post-${Date.now()}`;
+    }
+
+    // 清理和格式化
+    const slug = result
+      .toLowerCase()
+      .replace(/-+/g, '-')  // 合并多个连字符
+      .replace(/^-|-$/g, '') // 移除首尾连字符
+      .trim();
+
+    setValue('slug', slug);
   };
 
   return (
