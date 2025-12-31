@@ -43,7 +43,7 @@ export function CommentForm({ postId, onSuccess }: CommentFormProps) {
     await createComment.mutateAsync({
       content: data.content,
       postId,
-      authorId: 'cmjtvrnvk0000xxkq0z230qjb', // 测试用户ID
+      authorId: 'cmjtxid8r0000xxb32rwvhfhj', // 测试用户ID
     });
   };
 
