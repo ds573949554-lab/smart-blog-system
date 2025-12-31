@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -22,6 +23,8 @@ type PostFormData = z.infer<typeof postSchema>;
 export default function NewPostPage() {
   const router = useRouter();
   const utils = trpc.useUtils();
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generateError, setGenerateError] = useState<string | null>(null);
 
   const {
     register,
@@ -48,8 +51,43 @@ export default function NewPostPage() {
     });
   };
 
-  // 自动生成 slug
+  // 自动生成内容（使用智谱 AI）
   const title = watch('title');
+
+  const generateContent = async () => {
+    if (!title) {
+      setGenerateError('请先输入标题');
+      return;
+    }
+
+    setIsGenerating(true);
+    setGenerateError(null);
+
+    try {
+      const response = await fetch('/api/generate-content', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || '生成失败');
+      }
+
+      const data = await response.json();
+      setValue('content', data.content);
+    } catch (error) {
+      console.error('生成内容失败:', error);
+      setGenerateError(error instanceof Error ? error.message : '生成失败，请重试');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  // 自动生成 slug
   const generateSlug = () => {
     if (!title) return;
 
@@ -136,17 +174,34 @@ export default function NewPostPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="content">内容 *</Label>
+              <div className="flex justify-between items-center">
+                <Label htmlFor="content">内容 *</Label>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={generateContent}
+                  disabled={isGenerating || !title}
+                >
+                  {isGenerating ? '生成中...' : '🤖 AI 自动生成'}
+                </Button>
+              </div>
+              {generateError && (
+                <p className="text-sm text-destructive">{generateError}</p>
+              )}
               <Textarea
                 id="content"
                 {...register('content')}
-                placeholder="输入文章内容（支持 Markdown）"
+                placeholder="输入文章内容（支持 Markdown）或点击上方按钮使用 AI 自动生成"
                 rows={15}
                 className="font-mono text-sm"
               />
               {errors.content && (
                 <p className="text-sm text-destructive">{errors.content.message}</p>
               )}
+              <p className="text-sm text-muted-foreground">
+                💡 提示：先输入标题，然后点击"AI 自动生成"按钮即可生成文章内容
+              </p>
             </div>
 
             <div className="flex gap-4">
