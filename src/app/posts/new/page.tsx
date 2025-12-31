@@ -47,7 +47,7 @@ export default function NewPostPage() {
     // 使用测试用户ID（实际项目中应该从认证系统获取）
     await createPost.mutateAsync({
       ...data,
-      authorId: 'cmjtvrnvk0000xxkq0z230qjb', // 测试用户ID
+      authorId: 'cmjtxid8r0000xxb32rwvhfhj', // 测试用户ID
     });
   };
 
