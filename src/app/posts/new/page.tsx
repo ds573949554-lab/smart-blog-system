@@ -36,19 +36,30 @@ export default function NewPostPage() {
     resolver: zodResolver(postSchema),
   });
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const createPost = trpc.post.create.useMutation({
     onSuccess: (data) => {
       utils.post.getAll.invalidate();
       router.push(`/posts/${data.slug}`);
     },
+    onError: (error) => {
+      console.error('发布失败:', error);
+      setSubmitError(error.message || '发布失败，请重试');
+    },
   });
 
   const onSubmit = async (data: PostFormData) => {
-    // 使用测试用户ID（实际项目中应该从认证系统获取）
-    await createPost.mutateAsync({
-      ...data,
-      authorId: 'cmjtxid8r0000xxb32rwvhfhj', // 测试用户ID
-    });
+    setSubmitError(null);
+    try {
+      // 使用测试用户ID（实际项目中应该从认证系统获取）
+      await createPost.mutateAsync({
+        ...data,
+        authorId: 'cmjtxid8r0000xxb32rwvhfhj', // 测试用户ID
+      });
+    } catch (err) {
+      // 错误已在 onError 中处理
+    }
   };
 
   // 自动生成内容（使用智谱 AI）
@@ -204,9 +215,15 @@ export default function NewPostPage() {
               </p>
             </div>
 
+            {submitError && (
+              <div className="p-4 bg-destructive/10 border border-destructive rounded-lg">
+                <p className="text-sm text-destructive font-medium">发布失败：{submitError}</p>
+              </div>
+            )}
+
             <div className="flex gap-4">
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? '发布中...' : '发布文章'}
+              <Button type="submit" disabled={isSubmitting || createPost.isPending}>
+                {isSubmitting || createPost.isPending ? '发布中...' : '发布文章'}
               </Button>
               <Button
                 type="button"
