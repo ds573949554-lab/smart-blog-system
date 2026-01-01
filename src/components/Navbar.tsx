@@ -61,11 +61,18 @@ export function Navbar() {
                 priority
               />
             </motion.div>
+            {/* 桌面端显示完整信息 */}
             <div className="hidden md:block">
               <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 双铭策划
               </h1>
               <p className="text-xs text-muted-foreground">合伙公司</p>
+            </div>
+            {/* 手机端显示简洁公司名 */}
+            <div className="md:hidden">
+              <h1 className="text-base font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent whitespace-nowrap">
+                双铭策划
+              </h1>
             </div>
           </Link>
 
