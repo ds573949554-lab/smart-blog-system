@@ -3,17 +3,20 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession, signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { useI18n } from '@/lib/i18n/I18nContext';
 import Image from 'next/image';
+import { LogIn, LogOut, User } from 'lucide-react';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { t } = useI18n();
+  const { data: session, status } = useSession();
 
   const navItems = [
     { name: t.nav.home, href: '/' },
@@ -63,14 +66,14 @@ export function Navbar() {
             </motion.div>
             {/* 桌面端显示完整信息 */}
             <div className="hidden md:block">
-              <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent font-brand tracking-wide hover:scale-105 transition-all duration-300">
                 双铭策划
               </h1>
-              <p className="text-xs text-muted-foreground">合伙公司</p>
+              <p className="text-xs font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent font-brand tracking-wide">合伙公司</p>
             </div>
             {/* 手机端显示简洁公司名 */}
             <div className="md:hidden">
-              <h1 className="text-base font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent whitespace-nowrap">
+              <h1 className="text-lg font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent whitespace-nowrap font-brand tracking-wide">
                 双铭策划
               </h1>
             </div>
@@ -105,9 +108,40 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Language Switcher & CTA Button */}
+          {/* Language Switcher & Auth Buttons */}
           <div className="hidden lg:flex items-center gap-3">
             <LanguageSwitcher />
+
+            {/* 登录/注销按钮 */}
+            {status === 'loading' ? (
+              <Button disabled variant="ghost" className="gap-2">
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                加载中...
+              </Button>
+            ) : session ? (
+              <div className="flex items-center gap-3">
+                <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10">
+                  <User className="h-4 w-4 text-primary" />
+                  <span className="text-sm font-medium text-primary">{session.user?.name || session.user?.email}</span>
+                </div>
+                <Button
+                  onClick={() => signOut()}
+                  variant="outline"
+                  className="gap-2 shadow-lg"
+                >
+                  <LogOut className="h-4 w-4" />
+                  退出登录
+                </Button>
+              </div>
+            ) : (
+              <Button asChild variant="default" className="gap-2 shadow-lg">
+                <Link href="/auth/signin">
+                  <LogIn className="h-4 w-4" />
+                  登录
+                </Link>
+              </Button>
+            )}
+
             <Button asChild className="shadow-lg">
               <Link href="/contact">{t.nav.consultation}</Link>
             </Button>
@@ -177,6 +211,41 @@ export function Navbar() {
                   );
                 })}
                 <div className="pt-4 space-y-3 border-t border-border mt-2">
+                  {/* 移动端登录/注销 */}
+                  <div className="px-4 space-y-2">
+                    {status === 'loading' ? (
+                      <Button disabled className="w-full gap-2">
+                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                        加载中...
+                      </Button>
+                    ) : session ? (
+                      <>
+                        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/10 mb-2">
+                          <User className="h-4 w-4 text-primary" />
+                          <span className="text-sm font-medium text-primary">{session.user?.name || session.user?.email}</span>
+                        </div>
+                        <Button
+                          onClick={() => {
+                            signOut();
+                            setIsMobileMenuOpen(false);
+                          }}
+                          variant="outline"
+                          className="w-full gap-2"
+                        >
+                          <LogOut className="h-4 w-4" />
+                          退出登录
+                        </Button>
+                      </>
+                    ) : (
+                      <Button asChild className="w-full gap-2">
+                        <Link href="/auth/signin" onClick={() => setIsMobileMenuOpen(false)}>
+                          <LogIn className="h-4 w-4" />
+                          登录
+                        </Link>
+                      </Button>
+                    )}
+                  </div>
+
                   <div className="px-4 flex justify-center">
                     <LanguageSwitcher />
                   </div>
