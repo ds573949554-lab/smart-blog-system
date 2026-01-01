@@ -68,14 +68,14 @@ export function Navbar() {
             {/* 桌面端显示完整信息 */}
             <div className="hidden md:block">
               <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent font-gradient-text tracking-wide hover:scale-105 transition-all duration-300">
-                双铭策划
+                {t.nav.companyName}
               </h1>
-              <p className="text-xs font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent font-gradient-text tracking-wide">合伙公司</p>
+              <p className="text-xs font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent font-gradient-text tracking-wide">{t.nav.companySuffix}</p>
             </div>
             {/* 手机端显示简洁公司名 */}
             <div className="md:hidden">
               <h1 className="text-lg font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent whitespace-nowrap font-gradient-text tracking-wide">
-                双铭策划
+                {t.nav.companyName}
               </h1>
             </div>
           </Link>

@@ -12,6 +12,8 @@ export const en: Translation = {
     team: 'Our Team',
     contact: 'Contact Us',
     consultation: 'Get Started',
+    companyName: 'Shuangming Planning',
+    companySuffix: 'Partnership',
   },
 
   // About

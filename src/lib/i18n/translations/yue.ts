@@ -12,6 +12,8 @@ export const yue: Translation = {
     team: '團隊介紹',
     contact: '聯絡我哋',
     consultation: '即刻咨詢',
+    companyName: '雙銘策劃',
+    companySuffix: '合夥公司',
   },
 
   // 關於我哋

@@ -10,6 +10,8 @@ export const zhCN = {
     team: '团队介绍',
     contact: '联系我们',
     consultation: '立即咨询',
+    companyName: '双铭策划',
+    companySuffix: '合伙公司',
   },
 
   // 关于我们
