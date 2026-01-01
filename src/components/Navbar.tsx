@@ -36,9 +36,9 @@ export function Navbar() {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? 'bg-white/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
+          : 'bg-white/80 backdrop-blur-sm shadow-md lg:bg-transparent lg:shadow-none'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -141,13 +141,13 @@ export function Navbar() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              className="lg:hidden py-4 border-t border-border"
+              className="lg:hidden py-4 border-t border-border bg-white/95"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-3 pb-4">
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
                   return (
@@ -169,15 +169,17 @@ export function Navbar() {
                     </Link>
                   );
                 })}
-                <div className="pt-2 space-y-2">
-                  <div className="px-4">
+                <div className="pt-4 space-y-3 border-t border-border mt-2">
+                  <div className="px-4 flex justify-center">
                     <LanguageSwitcher />
                   </div>
-                  <Button asChild className="w-full">
-                    <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                      {t.nav.consultation}
-                    </Link>
-                  </Button>
+                  <div className="px-4">
+                    <Button asChild className="w-full">
+                      <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                        {t.nav.consultation}
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </motion.div>
