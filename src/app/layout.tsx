@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import { TRPCProvider } from "@/lib/trpc/Provider";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import { WebVitalsReporter } from "@/components/WebVitalsReporter";
+
+// Footer懒加载 - 非首屏关键组件
+const Footer = dynamic(() => import("@/components/Footer").then(mod => ({ default: mod.Footer })), {
+  loading: () => <div className="h-96" />,
+  ssr: true,
+});
 
 export const metadata: Metadata = {
   title: {
@@ -29,6 +36,7 @@ export default function RootLayout({
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased">
         <TRPCProvider>
+          <WebVitalsReporter />
           <Navbar />
           <main className="pt-20">{children}</main>
           <Footer />
