@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -25,9 +25,18 @@ model User {
 model Post {
   id        String   @id @default(cuid())
   title     String
-  content   String
+  content   String   // SQLite TEXT 默认支持大字段
   slug      String   @unique
   published Boolean  @default(false)
+
+  // 多媒体支持 (存储为JSON字符串)
+  images    String   @default("[]") // 图片URL数组JSON
+  videos    String   @default("[]") // 视频URL数组JSON
+  livePhotos String  @default("[]") // 实况图片URL数组JSON
+
+  // 媒体元数据
+  thumbnail String?  // 缩略图
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

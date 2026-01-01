@@ -11,11 +11,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
+import { MediaUploader } from '@/components/MediaUploader';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const postSchema = z.object({
   title: z.string().min(1, '标题不能为空'),
   content: z.string().min(10, '内容至少需要10个字符'),
   slug: z.string().min(1, 'Slug 不能为空').regex(/^[a-z0-9-]+$/, 'Slug 只能包含小写字母、数字和横线'),
+  images: z.array(z.string()).optional(),
+  videos: z.array(z.string()).optional(),
 });
 
 type PostFormData = z.infer<typeof postSchema>;
@@ -25,6 +29,8 @@ export default function NewPostPage() {
   const utils = trpc.useUtils();
   const [isGenerating, setIsGenerating] = useState(false);
   const [generateError, setGenerateError] = useState<string | null>(null);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [uploadedVideos, setUploadedVideos] = useState<string[]>([]);
 
   const {
     register,
@@ -34,6 +40,10 @@ export default function NewPostPage() {
     setValue,
   } = useForm<PostFormData>({
     resolver: zodResolver(postSchema),
+    defaultValues: {
+      images: [],
+      videos: [],
+    },
   });
 
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -55,11 +65,41 @@ export default function NewPostPage() {
       // 使用测试用户ID（实际项目中应该从认证系统获取）
       await createPost.mutateAsync({
         ...data,
+        images: JSON.stringify(uploadedImages),
+        videos: JSON.stringify(uploadedVideos),
         authorId: 'cmjtxid8r0000xxb32rwvhfhj', // 测试用户ID
       });
     } catch (err) {
       // 错误已在 onError 中处理
     }
+  };
+
+  // 处理图片上传完成
+  const handleImagesUpload = (urls: string[]) => {
+    const newImages = [...uploadedImages, ...urls];
+    setUploadedImages(newImages);
+    setValue('images', newImages);
+  };
+
+  // 处理视频上传完成
+  const handleVideosUpload = (urls: string[]) => {
+    const newVideos = [...uploadedVideos, ...urls];
+    setUploadedVideos(newVideos);
+    setValue('videos', newVideos);
+  };
+
+  // 删除已上传的图片
+  const removeImage = (index: number) => {
+    const newImages = uploadedImages.filter((_, i) => i !== index);
+    setUploadedImages(newImages);
+    setValue('images', newImages);
+  };
+
+  // 删除已上传的视频
+  const removeVideo = (index: number) => {
+    const newVideos = uploadedVideos.filter((_, i) => i !== index);
+    setUploadedVideos(newVideos);
+    setValue('videos', newVideos);
   };
 
   // 自动生成内容（使用智谱 AI）
@@ -139,11 +179,11 @@ export default function NewPostPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl">
+    <div className="container mx-auto px-4 py-12 max-w-6xl">
       <Card>
         <CardHeader>
-          <CardTitle>发布新文章</CardTitle>
-          <CardDescription>填写文章信息并发布</CardDescription>
+          <CardTitle>发布成功案例</CardTitle>
+          <CardDescription>分享你的精彩案例，支持图片、视频和大量文字</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -203,15 +243,93 @@ export default function NewPostPage() {
               <Textarea
                 id="content"
                 {...register('content')}
-                placeholder="输入文章内容（支持 Markdown）或点击上方按钮使用 AI 自动生成"
-                rows={15}
+                placeholder="输入案例内容，支持大量文字（支持 Markdown 格式）或点击上方按钮使用 AI 自动生成"
+                rows={20}
                 className="font-mono text-sm"
               />
               {errors.content && (
                 <p className="text-sm text-destructive">{errors.content.message}</p>
               )}
               <p className="text-sm text-muted-foreground">
-                💡 提示：先输入标题，然后点击"AI 自动生成"按钮即可生成文章内容
+                💡 提示：支持大量文字内容，可以详细描述你的案例过程和成果
+              </p>
+            </div>
+
+            {/* 多媒体上传 */}
+            <div className="space-y-2">
+              <Label>多媒体内容</Label>
+              <Tabs defaultValue="images" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="images">
+                    📷 图片 {uploadedImages.length > 0 && `(${uploadedImages.length})`}
+                  </TabsTrigger>
+                  <TabsTrigger value="videos">
+                    🎬 视频 {uploadedVideos.length > 0 && `(${uploadedVideos.length})`}
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="images" className="mt-4">
+                  <MediaUploader
+                    onUploadComplete={handleImagesUpload}
+                    maxFiles={20}
+                    acceptImages={true}
+                    acceptVideos={false}
+                  />
+                  {uploadedImages.length > 0 && (
+                    <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+                      {uploadedImages.map((url, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={url}
+                            alt={`图片 ${index + 1}`}
+                            className="w-full h-32 object-cover rounded-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeImage(index)}
+                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </TabsContent>
+
+                <TabsContent value="videos" className="mt-4">
+                  <MediaUploader
+                    onUploadComplete={handleVideosUpload}
+                    maxFiles={5}
+                    acceptImages={false}
+                    acceptVideos={true}
+                  />
+                  {uploadedVideos.length > 0 && (
+                    <div className="mt-4 space-y-4">
+                      {uploadedVideos.map((url, index) => (
+                        <div key={index} className="relative group">
+                          <video
+                            src={url}
+                            controls
+                            className="w-full max-h-96 rounded-lg"
+                          >
+                            您的浏览器不支持视频播放
+                          </video>
+                          <button
+                            type="button"
+                            onClick={() => removeVideo(index)}
+                            className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            删除视频
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </TabsContent>
+              </Tabs>
+              <p className="text-sm text-muted-foreground">
+                💡 支持上传图片和视频来展示你的案例成果。图片最大10MB，视频最大60MB（约1分钟）
               </p>
             </div>
 
