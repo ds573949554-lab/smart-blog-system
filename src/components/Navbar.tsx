@@ -147,8 +147,11 @@ export function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Auth Button & Menu Button */}
+          {/* Mobile Auth Button, Language Switcher & Menu Button */}
           <div className="lg:hidden flex items-center gap-2">
+            {/* 手机端语言切换器 */}
+            <LanguageSwitcher />
+
             {/* 手机端登录按钮 */}
             {status === 'loading' ? (
               <div className="h-8 w-8 flex items-center justify-center">
