@@ -10,7 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        brand: ["var(--font-style-3)", "system-ui", "sans-serif"], // 当前使用字体
+        brand: ["var(--font-style-1)", "system-ui", "sans-serif"], // 站酷小薇体 - 工整大气
+        art: ["var(--font-style-3)", "system-ui", "sans-serif"], // 站酷快乐体 - 艺术活泼
         serif: ["var(--font-serif)", "serif"],
       },
       colors: {

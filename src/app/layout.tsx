@@ -59,6 +59,7 @@ const zhiMangXing = Zhi_Mang_Xing({
 
 // 当前使用的字体（改这里切换字体）
 const currentBrandFont = zCoolKuaiLe; // 👈 站酷快乐体 - 活泼欢快
+const artFont = zCoolKuaiLe; // 👈 站酷快乐体 - 艺术活泼
 
 // 优雅衬线字体 - 用于副标题
 const notoSerifSC = Noto_Serif_SC({
