@@ -18,6 +18,9 @@ export const authOptions: NextAuthOptions = {
           response_type: 'code',
         },
       },
+      httpOptions: {
+        timeout: 10000,
+      },
     }),
   ],
   pages: {
@@ -29,6 +32,18 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 天
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      // 允许所有 Google 账号登录
+      return true;
+    },
+    async redirect({ url, baseUrl }) {
+      // 登录成功后重定向到发布页面
+      if (url.startsWith('/')) return `${baseUrl}${url}`;
+      // 如果是相对 URL，返回 baseUrl + url
+      else if (new URL(url).origin === baseUrl) return url;
+      // 否则返回发布页面
+      return `${baseUrl}/posts/new`;
+    },
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
@@ -49,5 +64,5 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   useSecureCookies: process.env.NODE_ENV === 'production',
-  debug: process.env.NODE_ENV === 'development',
+  debug: false, // 生产环境关闭调试
 };
