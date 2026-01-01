@@ -19,6 +19,21 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/auth/signin',
   },
+  session: {
+    strategy: 'database',
+    maxAge: 30 * 24 * 60 * 60, // 30 天
+  },
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: true, // 生产环境必须使用 HTTPS
+      },
+    },
+  },
   callbacks: {
     async session({ session, user }) {
       if (session.user) {
