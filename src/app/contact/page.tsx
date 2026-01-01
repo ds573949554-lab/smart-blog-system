@@ -7,43 +7,40 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-
-const contactInfo: Array<{
-  icon: string;
-  title: string;
-  content: string;
-  color: string;
-  link?: string;
-}> = [
-  {
-    icon: '📍',
-    title: '公司地址',
-    content: '美国纽约皇后区53rd 90',
-    color: 'from-blue-500 to-cyan-500',
-  },
-  {
-    icon: '💼',
-    title: 'LinkedIn',
-    content: 'linkedin.com/in/shuangmingd2',
-    link: 'https://linkedin.com/in/shuangmingd2',
-    color: 'from-purple-500 to-pink-500',
-  },
-  {
-    icon: '📧',
-    title: '电子邮箱',
-    content: 'shuangmingd2@gmail.com',
-    link: 'mailto:shuangmingd2@gmail.com',
-    color: 'from-orange-500 to-red-500',
-  },
-  {
-    icon: '⏰',
-    title: '工作时间',
-    content: '周一至周五 9:00-18:00 (美东时间)',
-    color: 'from-green-500 to-emerald-500',
-  },
-];
+import { useI18n } from '@/lib/i18n/I18nContext';
 
 export default function ContactPage() {
+  const { t } = useI18n();
+
+  const contactInfo = [
+    {
+      icon: '📍',
+      title: t.contact.address,
+      content: '美国纽约皇后区53rd 90',
+      color: 'from-blue-500 to-cyan-500',
+    },
+    {
+      icon: '💼',
+      title: 'LinkedIn',
+      content: 'linkedin.com/in/shuangmingd2',
+      link: 'https://linkedin.com/in/shuangmingd2',
+      color: 'from-purple-500 to-pink-500',
+    },
+    {
+      icon: '📧',
+      title: t.contact.email,
+      content: 'shuangmingd2@gmail.com',
+      link: 'mailto:shuangmingd2@gmail.com',
+      color: 'from-orange-500 to-red-500',
+    },
+    {
+      icon: '⏰',
+      title: t.contact.workingHours,
+      content: '周一至周五 9:00-18:00 (美东时间)',
+      color: 'from-green-500 to-emerald-500',
+    },
+  ];
+
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -99,11 +96,11 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              联系我们
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-gradient-text">
+              {t.contact.title}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              期待与您合作，让我们一起创造非凡
+              {t.contact.subtitle}
             </p>
           </motion.div>
         </div>
@@ -160,15 +157,15 @@ export default function ContactPage() {
             >
               <Card>
                 <CardContent className="p-10">
-                  <h2 className="text-3xl font-bold mb-6 text-center">在线咨询</h2>
+                  <h2 className="text-3xl font-bold mb-6 text-center">{t.contact.formTitle}</h2>
                   <p className="text-center text-muted-foreground mb-8">
-                    填写表单，我们将在24小时内与您联系
+                    {t.contact.formSubtitle}
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="name">姓名 *</Label>
+                        <Label htmlFor="name">{t.contact.name} *</Label>
                         <Input
                           id="name"
                           name="name"
@@ -179,7 +176,7 @@ export default function ContactPage() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="company">公司名称</Label>
+                        <Label htmlFor="company">{t.contact.company}</Label>
                         <Input
                           id="company"
                           name="company"
@@ -192,7 +189,7 @@ export default function ContactPage() {
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="email">电子邮箱 *</Label>
+                        <Label htmlFor="email">{t.contact.email} *</Label>
                         <Input
                           id="email"
                           name="email"
@@ -204,7 +201,7 @@ export default function ContactPage() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="phone">联系电话 *</Label>
+                        <Label htmlFor="phone">{t.contact.phone} *</Label>
                         <Input
                           id="phone"
                           name="phone"
@@ -236,7 +233,7 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message">留言内容 *</Label>
+                      <Label htmlFor="message">{t.contact.message} *</Label>
                       <Textarea
                         id="message"
                         name="message"
@@ -264,7 +261,7 @@ export default function ContactPage() {
                       className="w-full"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? '提交中...' : '提交咨询'}
+                      {isSubmitting ? '提交中...' : t.contact.send}
                     </Button>
                   </form>
                 </CardContent>

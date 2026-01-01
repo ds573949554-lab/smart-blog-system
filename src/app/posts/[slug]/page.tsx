@@ -9,8 +9,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Share2, Copy, Check } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nContext';
 
 export default function PostDetailPage() {
+  const { t, locale } = useI18n();
   const params = useParams();
   const slug = params.slug as string;
   const [copied, setCopied] = useState(false);
@@ -42,12 +44,12 @@ export default function PostDetailPage() {
       <div className="container mx-auto px-4 py-12">
         <Card>
           <CardHeader>
-            <CardTitle>文章未找到</CardTitle>
-            <CardDescription>抱歉，找不到这篇文章</CardDescription>
+            <CardTitle>{t.postDetail.notFound}</CardTitle>
+            <CardDescription>{t.postDetail.notFoundDescription}</CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild>
-              <Link href="/posts">返回文章列表</Link>
+              <Link href="/posts">{t.postDetail.backToList}</Link>
             </Button>
           </CardContent>
         </Card>
@@ -58,7 +60,7 @@ export default function PostDetailPage() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       <Button variant="ghost" asChild className="mb-6">
-        <Link href="/posts">← 返回列表</Link>
+        <Link href="/posts">← {t.postDetail.back}</Link>
       </Button>
 
       <article className="prose prose-slate max-w-none">
@@ -77,14 +79,14 @@ export default function PostDetailPage() {
           </div>
           <span>•</span>
           <time dateTime={new Date(post.createdAt).toISOString()}>
-            {new Date(post.createdAt).toLocaleDateString('zh-CN', {
+            {new Date(post.createdAt).toLocaleDateString(locale, {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
             })}
           </time>
           <span>•</span>
-          <span>{comments?.length || 0} 条评论</span>
+          <span>{comments?.length || 0} {t.postDetail.comments}</span>
         </div>
 
         <div className="whitespace-pre-wrap">{post.content}</div>
@@ -123,7 +125,7 @@ export default function PostDetailPage() {
                         className="w-full max-h-[600px] bg-black"
                         preload="metadata"
                       >
-                        您的浏览器不支持视频播放
+                        {t.post.errors.videoNotSupported}
                       </video>
                       <p className="text-sm text-muted-foreground mt-2">视频 {index + 1}</p>
                     </div>
@@ -147,12 +149,12 @@ export default function PostDetailPage() {
                 {copied ? (
                   <>
                     <Check className="h-4 w-4" />
-                    已复制
+                    {t.postDetail.copied}
                   </>
                 ) : (
                   <>
                     <Copy className="h-4 w-4" />
-                    复制链接
+                    {t.postDetail.copyLink}
                   </>
                 )}
               </Button>
@@ -163,7 +165,7 @@ export default function PostDetailPage() {
                 className="gap-2"
               >
                 <Share2 className="h-4 w-4" />
-                分享到社交平台
+                {t.postDetail.share}
               </Button>
             </div>
           </div>
@@ -190,7 +192,7 @@ export default function PostDetailPage() {
                   <div className="mt-3 flex items-center gap-2 text-xs text-gray-500">
                     <span>{post.author.name}</span>
                     <span>•</span>
-                    <span>{new Date(post.createdAt).toLocaleDateString('zh-CN')}</span>
+                    <span>{new Date(post.createdAt).toLocaleDateString(locale)}</span>
                   </div>
                 </div>
               </div>
@@ -203,7 +205,7 @@ export default function PostDetailPage() {
       </article>
 
       <div className="mt-12">
-        <h2 className="text-2xl font-bold mb-6">评论 ({comments?.length || 0})</h2>
+        <h2 className="text-2xl font-bold mb-6">{t.postDetail.comments} ({comments?.length || 0})</h2>
 
         <div className="mb-8">
           <CommentForm postId={post.id} />
@@ -230,7 +232,7 @@ export default function PostDetailPage() {
                     )}
                     <CardDescription>
                       {comment.author.name} •{' '}
-                      {new Date(comment.createdAt).toLocaleDateString('zh-CN')}
+                      {new Date(comment.createdAt).toLocaleDateString(locale)}
                     </CardDescription>
                   </div>
                 </CardHeader>
@@ -241,7 +243,7 @@ export default function PostDetailPage() {
             ))}
           </div>
         ) : (
-          <p className="text-muted-foreground">还没有评论</p>
+          <p className="text-muted-foreground">{t.postDetail.noComments}</p>
         )}
       </div>
     </div>

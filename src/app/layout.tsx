@@ -6,7 +6,8 @@ import {
   ZCOOL_KuaiLe,
   Liu_Jian_Mao_Cao,
   Zhi_Mang_Xing,
-  Noto_Serif_SC
+  Noto_Serif_SC,
+  Playfair_Display
 } from "next/font/google";
 import "./globals.css";
 import { TRPCProvider } from "@/lib/trpc/Provider";
@@ -69,6 +70,14 @@ const notoSerifSC = Noto_Serif_SC({
   display: "swap",
 });
 
+// 🎨 高级渐变文字专用字体 - Playfair Display
+const playfairDisplay = Playfair_Display({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-gradient",
+  display: "swap",
+});
+
 // Footer懒加载 - 非首屏关键组件
 const Footer = dynamic(() => import("@/components/Footer").then(mod => ({ default: mod.Footer })), {
   loading: () => <div className="h-96" />,
@@ -106,7 +115,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning className={`${currentBrandFont.variable} ${notoSerifSC.variable}`}>
+    <html lang="zh-CN" suppressHydrationWarning className={`${currentBrandFont.variable} ${notoSerifSC.variable} ${playfairDisplay.variable}`}>
       <body className="min-h-screen bg-background font-sans antialiased">
         <Providers>
           <I18nProvider>

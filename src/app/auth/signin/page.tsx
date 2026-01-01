@@ -11,7 +11,7 @@ export default function SignInPage() {
     <div className="container mx-auto px-4 py-12 flex items-center justify-center min-h-screen">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-brand bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">欢迎回来</CardTitle>
+          <CardTitle className="text-3xl font-gradient-text bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">欢迎回来</CardTitle>
           <CardDescription>
             选择一个平台登录以发布您的成功案例
           </CardDescription>

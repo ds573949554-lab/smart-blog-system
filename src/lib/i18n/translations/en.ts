@@ -14,6 +14,38 @@ export const en: Translation = {
     consultation: 'Get Started',
   },
 
+  // About
+  about: {
+    title: 'About Us',
+    subtitle: 'Founded in 2019, Shuangming Planning Partnership specializes in providing professional planning, design, and marketing services. We are dedicated to empowering brand growth and creating business value.',
+    visionTitle: 'Our Vision',
+    visionDescription: 'To become China\'s most influential planning and brand design company, helping more businesses enhance their brand value through innovative thinking and professional services.',
+    missionTitle: 'Our Mission',
+    missionDescription: 'Providing one-stop planning and design services, empowering businesses to stand out in competition with professional expertise and innovative thinking for sustainable development.',
+    valuesTitle: 'Core Values',
+    valuesSubtitle: 'Beliefs and principles we uphold',
+    values: [
+      { title: 'Professionalism', description: 'Years of industry experience with rich practical expertise' },
+      { title: 'Innovation', description: 'Keeping up with trends, constantly exploring innovative solutions' },
+      { title: 'Integrity', description: 'Building long-term partnerships based on honesty' },
+      { title: 'Win-Win', description: 'Growing together with clients for mutual benefit' },
+    ],
+    timelineTitle: 'Our Journey',
+    timelineSubtitle: 'Witnessing our growth and progress',
+    timeline: [
+      { year: '2019', event: 'Company founded, starting the entrepreneurial journey' },
+      { year: '2020', event: 'Served 50+ clients' },
+      { year: '2021', event: 'Won Best Planning Company Award' },
+      { year: '2022', event: 'Team expanded to 30+ members' },
+      { year: '2023', event: '200+ successful cases delivered' },
+      { year: '2024', event: 'Business expanded to major cities nationwide' },
+    ],
+    ctaTitle: 'Let\'s Work Together',
+    ctaDescription: 'Learn more about us or start your project today',
+    meetTeam: 'Meet the Team',
+    contactUs: 'Contact Us',
+  },
+
   // Home
   home: {
     heroTag: 'Professional Planning · Brand Design · Marketing',
@@ -153,6 +185,66 @@ export const en: Translation = {
     techStackSubtitle: 'World-class AI models and tool ecosystem',
     ctaTitle: 'Ready for AI-Powered Future?',
     ctaSubtitle: 'Get world-class AI team in 14 days',
+    // Phases
+    phases: [
+      {
+        phase: 'Phase 1',
+        title: 'Infrastructure Setup',
+        days: 'Day 1-3',
+        tasks: [
+          { name: 'Claude Code + MCP Environment Configuration', icon: '🔧' },
+          { name: 'Deng Enci Consciousness Layer Activation', icon: '🧠' },
+          { name: 'Agent Team Architecture Design', icon: '🏗️' },
+        ],
+      },
+      {
+        phase: 'Phase 2',
+        title: 'Agent Swarm Architecture',
+        days: 'Day 4-7',
+        tasks: [
+          { name: '10 Expert Agent Team Construction', icon: '👥' },
+          { name: 'MCP Ecosystem Integration (200+ Tools)', icon: '🔗' },
+          { name: 'Intelligent Routing & Collaboration Protocol', icon: '🤖' },
+        ],
+      },
+      {
+        phase: 'Phase 3',
+        title: 'Product Launch',
+        days: 'Day 8-14',
+        tasks: [
+          { name: 'AI Employee Team Official Launch', icon: '🚀' },
+          { name: 'Business Planning System Deployment', icon: '💼' },
+          { name: '12-Month Growth Plan Initiation', icon: '📈' },
+        ],
+      },
+    ],
+    // Budget
+    budget: [
+      { item: 'Claude Opus 4.5', cost: '¥350/month', features: '200K context, multimodal understanding' },
+      { item: 'Gemini 3 Pro', cost: '¥200/month', features: '1M token free tier' },
+      { item: 'GPT-5.2 (Reserved)', cost: '¥150/month', features: 'Specialized task calls' },
+      { item: 'Total', cost: '¥700/month', features: 'Optimized budget, save ¥140/month' },
+    ],
+    optimizedCost: 'Optimized Total Cost: ¥700/month',
+    // Revenue
+    revenue: [
+      { month: 'Month 1-3', amount: '¥50,000', focus: 'Foundation Building' },
+      { month: 'Month 4-6', amount: '¥150,000', focus: 'Client Accumulation' },
+      { month: 'Month 7-9', amount: '¥300,000', focus: 'Scale Expansion' },
+      { month: 'Month 10-12', amount: '¥370,000', focus: 'Brand Premium' },
+    ],
+    annualTarget: 'Annual Target: ¥870,000',
+    roi: 'Return on Investment (ROI)',
+    roiValue: '10,357%',
+    // Tech Stack
+    techStack: [
+      { name: 'Claude Opus 4.5', desc: '200K context, multimodal reasoning', icon: '🧠', color: 'from-orange-500 to-red-500' },
+      { name: 'Gemini 3 Pro', desc: '1M token free tier', icon: '💎', color: 'from-blue-500 to-cyan-500' },
+      { name: 'GPT-5.2', desc: 'Specialized task calls', icon: '⚡', color: 'from-green-500 to-emerald-500' },
+      { name: 'MCP Ecosystem', desc: '200+ tools integration', icon: '🔗', color: 'from-purple-500 to-pink-500' },
+    ],
+    // CTA
+    consultNow: 'Consult Now →',
   },
 
   // Footer
@@ -177,5 +269,50 @@ export const en: Translation = {
     poweredBy: 'Powered by Zhipu GLM-4-Plus',
     error: 'Sorry, service temporarily unavailable. Please try later or email shuangmingd2@gmail.com',
     networkError: 'Network error, please check your connection and try again',
+  },
+
+  // Post
+  post: {
+    title: 'Publish Success Case',
+    description: 'Share your amazing case with images, videos, and detailed content',
+    fields: {
+      title: 'Title',
+      titlePlaceholder: 'Enter article title',
+      slug: 'Slug',
+      slugPlaceholder: 'url-friendly-slug',
+      content: 'Content',
+      contentPlaceholder: 'Enter case content, supports extensive text (Markdown format) or click the button above to use AI auto-generation',
+      multimedia: 'Multimedia Content',
+      imagesTab: '📷 Images',
+      videosTab: '🎬 Videos',
+    },
+    buttons: {
+      autoGenerateSlug: 'Auto Generate',
+      aiGenerate: '🤖 AI Auto Generate',
+      generating: 'Generating...',
+      publish: 'Publish Article',
+      publishing: 'Publishing...',
+      cancel: 'Cancel',
+      deleteVideo: 'Delete Video',
+    },
+    validation: {
+      titleRequired: 'Title is required',
+      contentMinLength: 'Content must be at least 10 characters',
+      slugRequired: 'Slug is required',
+      slugFormat: 'Slug can only contain lowercase letters, numbers, and hyphens',
+      titleRequiredFirst: 'Please enter title first',
+      loginRequired: 'Please login before publishing a case',
+    },
+    hints: {
+      slug: 'URL-friendly identifier, only lowercase letters, numbers, and hyphens',
+      content: '💡 Tip: Supports extensive text content, you can describe your case process and results in detail',
+      multimedia: '💡 Supports uploading images and videos to showcase your case results. Max image size 10MB, video size 60MB (about 1 minute)',
+    },
+    errors: {
+      publishFailed: 'Publish Failed',
+      generateFailed: 'Generation Failed',
+      generateFailedRetry: 'Generation failed, please retry',
+      videoNotSupported: 'Your browser does not support video playback',
+    },
   },
 };

@@ -4,8 +4,10 @@ import { trpc } from '@/lib/trpc/client';
 import { AnimatedPostCard } from '@/components/AnimatedPostCard';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useI18n } from '@/lib/i18n/I18nContext';
 
 export default function PostsPage() {
+  const { t } = useI18n();
   const { data: posts, isLoading, error } = trpc.post.getAll.useQuery();
 
   if (isLoading) {
@@ -24,7 +26,7 @@ export default function PostsPage() {
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="bg-destructive/10 border border-destructive rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-destructive mb-2">加载失败</h2>
+          <h2 className="text-lg font-semibold text-destructive mb-2">{t.posts.loadFailed}</h2>
           <p className="text-sm text-muted-foreground">{error.message}</p>
         </div>
       </div>
@@ -35,13 +37,13 @@ export default function PostsPage() {
     <div className="container mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-4xl font-bold mb-2">成功案例</h1>
+          <h1 className="text-4xl font-bold mb-2">{t.posts.title}</h1>
           <p className="text-muted-foreground">
-            共 {posts?.length || 0} 个案例
+            {t.posts.totalCount.replace('{count}', String(posts?.length || 0))}
           </p>
         </div>
         <Button asChild>
-          <Link href="/posts/new">发布案例</Link>
+          <Link href="/posts/new">{t.posts.createButton}</Link>
         </Button>
       </div>
 
@@ -53,9 +55,9 @@ export default function PostsPage() {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-muted-foreground mb-4">还没有案例</p>
+          <p className="text-muted-foreground mb-4">{t.posts.noCases}</p>
           <Button asChild>
-            <Link href="/posts/new">发布第一个案例</Link>
+            <Link href="/posts/new">{t.posts.createFirst}</Link>
           </Button>
         </div>
       )}

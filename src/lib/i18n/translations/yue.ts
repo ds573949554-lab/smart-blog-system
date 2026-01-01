@@ -153,6 +153,66 @@ export const yue: Translation = {
     techStackSubtitle: '世界頂級 AI 模型同工具生態',
     ctaTitle: '準備好開啟 AI 驅動嘅未來未？',
     ctaSubtitle: '14 日內，等你嘅企業擁有世界級 AI 團隊',
+    // 三階段
+    phases: [
+      {
+        phase: '第一階段',
+        title: '基礎設施搭建',
+        days: '第 1-3 日',
+        tasks: [
+          { name: 'Claude Code + MCP 環境配置', icon: '🔧' },
+          { name: '鄧恩賜意識層系統激活', icon: '🧠' },
+          { name: 'Agent 團隊架構設計', icon: '🏗️' },
+        ],
+      },
+      {
+        phase: '第二階段',
+        title: 'Agent Swarm 架構',
+        days: '第 4-7 日',
+        tasks: [
+          { name: '10 Agent 專家團隊構建', icon: '👥' },
+          { name: 'MCP 生態系統集成 (200+ 工具)', icon: '🔗' },
+          { name: '智能路由同協作協議', icon: '🤖' },
+        ],
+      },
+      {
+        phase: '第三階段',
+        title: '產品上線',
+        days: '第 8-14 日',
+        tasks: [
+          { name: 'AI 員工團隊正式上崗', icon: '🚀' },
+          { name: '商業策劃系統部署', icon: '💼' },
+          { name: '12 個月增長計劃啟動', icon: '📈' },
+        ],
+      },
+    ],
+    // 預算
+    budget: [
+      { item: 'Claude Opus 4.5', cost: '¥350/月', features: '200K 上下文，多模態理解' },
+      { item: 'Gemini 3 Pro', cost: '¥200/月', features: '100 萬 Token 免費額度' },
+      { item: 'GPT-5.2 (預留)', cost: '¥150/月', features: '專項任務調用' },
+      { item: '總計', cost: '¥700/月', features: '優化後預算，慳 ¥140/月' },
+    ],
+    optimizedCost: '優化後總成本：¥700/月',
+    // 收入
+    revenue: [
+      { month: '第 1-3 月', amount: '¥50,000', focus: '基礎服務建立' },
+      { month: '第 4-6 月', amount: '¥150,000', focus: '客戶積累期' },
+      { month: '第 7-9 月', amount: '¥300,000', focus: '規模化擴張' },
+      { month: '第 10-12 月', amount: '¥370,000', focus: '品牌溢價期' },
+    ],
+    annualTarget: '年度目標：¥870,000',
+    roi: '投資回報率 (ROI)',
+    roiValue: '10,357%',
+    // 技術棧
+    techStack: [
+      { name: 'Claude Opus 4.5', desc: '200K 上下文，多模態推理', icon: '🧠', color: 'from-orange-500 to-red-500' },
+      { name: 'Gemini 3 Pro', desc: '100 萬 Token 免費額度', icon: '💎', color: 'from-blue-500 to-cyan-500' },
+      { name: 'GPT-5.2', desc: '專項任務調用', icon: '⚡', color: 'from-green-500 to-emerald-500' },
+      { name: 'MCP 生態', desc: '200+ 工具集成', icon: '🔗', color: 'from-purple-500 to-pink-500' },
+    ],
+    // CTA
+    consultNow: '即刻咨詢 →',
   },
 
   // 頁腳
@@ -177,5 +237,50 @@ export const yue: Translation = {
     poweredBy: '智譜 GLM-4-Plus 驅動',
     error: '唔好意思，服務暫時唔可用。請稍後再試或者發郵件去 shuangmingd2@gmail.com',
     networkError: '網絡錯誤，請檢查你嘅連接後重試',
+  },
+
+  // 發布成功案例
+  post: {
+    title: '發布成功案例',
+    description: '分享你嘅精彩案例，支持圖片、視頻同大量文字',
+    fields: {
+      title: '標題',
+      titlePlaceholder: '輸入文章標題',
+      slug: 'Slug',
+      slugPlaceholder: 'url-friendly-slug',
+      content: '內容',
+      contentPlaceholder: '輸入案例內容，支持大量文字（支持 Markdown 格式）或點擊上方按鈕使用 AI 自動生成',
+      multimedia: '多媒體內容',
+      imagesTab: '📷 圖片',
+      videosTab: '🎬 視頻',
+    },
+    buttons: {
+      autoGenerateSlug: '自動生成',
+      aiGenerate: '🤖 AI 自動生成',
+      generating: '生成中...',
+      publish: '發布文章',
+      publishing: '發布中...',
+      cancel: '取消',
+      deleteVideo: '刪除視頻',
+    },
+    validation: {
+      titleRequired: '標題唔可以為空',
+      contentMinLength: '內容至少需要10個字符',
+      slugRequired: 'Slug 唔可以為空',
+      slugFormat: 'Slug 只能包含細寫字母、數字同橫線',
+      titleRequiredFirst: '請先輸入標題',
+      loginRequired: '請先登錄後再發布案例',
+    },
+    hints: {
+      slug: 'URL 友好嘅標識符，只能包含細寫字母、數字同橫線',
+      content: '💡 提示：支持大量文字內容，可以詳細描述你嘅案例過程同成果',
+      multimedia: '💡 支持上傳圖片同視頻來展示你嘅案例成果。圖片最大10MB，視頻最大60MB（約1分鐘）',
+    },
+    errors: {
+      publishFailed: '發布失敗',
+      generateFailed: '生成失敗',
+      generateFailedRetry: '生成失敗，請重試',
+      videoNotSupported: '你嘅瀏覽器唔支持視頻播放',
+    },
   },
 };

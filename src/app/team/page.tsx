@@ -2,76 +2,13 @@
 
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
-
-const teamMembers = [
-  {
-    name: '邓志铭',
-    role: '联合创始人 & AI项目策划搭建师',
-    avatar: '👨‍💼',
-    bio: '10年策划行业经验，曾服务多家知名企业，擅长AI项目策划与系统搭建',
-    skills: ['AI项目策划', '系统架构搭建', '商业模式设计'],
-  },
-  {
-    name: '邓憬辰',
-    role: '联合创始人 & AI项目策划搭建师',
-    avatar: '👨‍💻',
-    bio: '资深AI项目专家，专注于AI团队系统搭建与落地实施',
-    skills: ['AI项目策划', 'Agent系统搭建', '技术实施'],
-  },
-  {
-    name: '李华',
-    role: '创意总监',
-    avatar: '👩‍🎨',
-    bio: '资深设计师，擅长品牌视觉设计',
-    skills: ['品牌设计', 'VI设计', '创意策划'],
-  },
-  {
-    name: '王强',
-    role: '营销总监',
-    avatar: '👨‍💻',
-    bio: '数字营销专家，精通全渠道营销',
-    skills: ['数字营销', '社交媒体', '数据分析'],
-  },
-  {
-    name: '陈杰',
-    role: '技术总监',
-    avatar: '👨‍💻',
-    bio: '全栈开发专家，引领数字化转型',
-    skills: ['Web开发', '移动开发', '系统架构'],
-  },
-  {
-    name: '赵敏',
-    role: '内容策划',
-    avatar: '👩‍✍️',
-    bio: '内容营销专家，擅长品牌故事讲述',
-    skills: ['内容策划', '文案撰写', 'SEO优化'],
-  },
-];
-
-const culture = [
-  {
-    icon: '🎯',
-    title: '目标导向',
-    description: '以结果为导向，追求卓越品质',
-  },
-  {
-    icon: '🤝',
-    title: '团队协作',
-    description: '开放沟通，高效协作，共同成长',
-  },
-  {
-    icon: '💡',
-    title: '持续创新',
-    description: '鼓励创新思维，拥抱变化',
-  },
-  {
-    icon: '📚',
-    title: '终身学习',
-    description: '不断学习，保持行业领先',
-  },
-];
+import { useI18n } from '@/lib/i18n/I18nContext';
 
 export default function TeamPage() {
+  const { t } = useI18n();
+  const teamMembers = t.team.members;
+  const culture = t.team.culture;
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -83,11 +20,11 @@ export default function TeamPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              团队介绍
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-gradient-text">
+              {t.team.title}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              汇聚行业精英，用专业和热情为客户创造价值
+              {t.team.subtitle}
             </p>
           </motion.div>
         </div>
@@ -102,9 +39,9 @@ export default function TeamPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">核心团队</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.team.coreTeam}</h2>
             <p className="text-xl text-muted-foreground">
-              经验丰富的专业团队，为您提供优质服务
+              {t.team.coreTeamSubtitle}
             </p>
           </motion.div>
 
@@ -158,14 +95,14 @@ export default function TeamPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">团队文化</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.team.cultureTitle}</h2>
             <p className="text-xl text-muted-foreground">
-              我们坚信的价值观和工作方式
+              {t.team.cultureSubtitle}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {culture.map((item, index) => (
+            {culture.map((item: any, index: number) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -175,7 +112,7 @@ export default function TeamPage() {
               >
                 <Card className="text-center h-full hover:shadow-xl transition-shadow">
                   <CardContent className="p-8">
-                    <div className="text-6xl mb-4">{item.icon}</div>
+                    <div className="text-6xl mb-4">🎯</div>
                     <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                     <p className="text-muted-foreground leading-relaxed">
                       {item.description}
@@ -200,23 +137,22 @@ export default function TeamPage() {
                   viewport={{ once: true }}
                 >
                   <div className="text-6xl mb-6">🚀</div>
-                  <h2 className="text-4xl font-bold mb-6">加入我们</h2>
+                  <h2 className="text-4xl font-bold mb-6">{t.team.joinTitle}</h2>
                   <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                    我们一直在寻找有才华、有激情的人才。
-                    如果你对策划、设计或营销充满热情，欢迎加入我们的团队！
+                    {t.team.joinDescription}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <a
                       href="/contact"
                       className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
                     >
-                      联系我们
+                      {t.team.meetTeam}
                     </a>
                     <a
                       href="mailto:shuangmingd2@gmail.com"
                       className="inline-flex items-center justify-center px-8 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors"
                     >
-                      发送简历
+                      {t.team.sendResume}
                     </a>
                   </div>
                 </motion.div>
