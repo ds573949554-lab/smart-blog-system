@@ -73,14 +73,17 @@ export const postRouter = router({
       })
     )
     .mutation(async ({ input }) => {
+      const { images, videos, livePhotos, thumbnail, ...restInput } = input;
+
       return await prisma.post.create({
         data: {
-          ...input,
+          ...restInput,
           published: true, // 默认发布
-          images: input.images || '[]',
-          videos: input.videos || '[]',
-          livePhotos: input.livePhotos || '[]',
-        } as any, // 临时类型断言，等待Vercel数据库更新
+          images: images || '[]',
+          videos: videos || '[]',
+          livePhotos: livePhotos || '[]',
+          thumbnail: thumbnail || null,
+        } as any,
       });
     }),
 
