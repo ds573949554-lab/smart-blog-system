@@ -62,3 +62,4 @@ export default function PostsPage() {
     </div>
   );
 }
+export { metadata } from "./metadata";

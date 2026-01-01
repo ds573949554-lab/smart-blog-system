@@ -284,3 +284,4 @@ export default function ContactPage() {
     </div>
   );
 }
+export { metadata } from "./metadata";

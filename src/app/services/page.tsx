@@ -255,3 +255,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+export { metadata } from "./metadata";
