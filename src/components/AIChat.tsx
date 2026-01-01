@@ -142,7 +142,7 @@ export function AIChat() {
                 </div>
                 <div>
                   <h3 className="font-bold text-sm md:text-base">{t.chat.title}</h3>
-                  <p className="text-[10px] md:text-xs text-white/80">{t.chat.poweredBy}</p>
+                  <p className="text-[10px] md:text-xs text-white/80">智谱 GLM-4-Flash 驱动</p>
                 </div>
               </div>
             </div>

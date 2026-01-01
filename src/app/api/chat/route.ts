@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 
     const responseLanguage = languageMap[locale] || '简体中文';
 
-    // 调用智谱 AI API (GLM-4-Plus)
+    // 调用智谱 AI API (GLM-4-Flash - 快速且经济)
     const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
       method: 'POST',
       headers: {
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
         'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'glm-4-plus',
+        model: 'glm-4-flash',
         messages: [
           {
             role: 'system',
