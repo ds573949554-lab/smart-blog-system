@@ -62,7 +62,7 @@ export function getPerformanceSuggestions(report: PerformanceReport): string[] {
     suggestions.push('优化最大内容绘制(LCP): 考虑压缩图片、使用CDN、优化服务器响应时间');
   }
 
-  if (report.ratings.fid === 'poor' || report.ratings.inp === 'poor') {
+  if (report.ratings.inp === 'poor') {
     suggestions.push('减少交互延迟: 优化JavaScript执行、减少主线程工作、使用Web Workers');
   }
 

@@ -214,4 +214,3 @@ export default function AboutPage() {
     </div>
   );
 }
-export { metadata } from "./metadata";

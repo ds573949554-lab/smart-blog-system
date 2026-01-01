@@ -228,4 +228,3 @@ export default function TeamPage() {
     </div>
   );
 }
-export { metadata } from "./metadata";

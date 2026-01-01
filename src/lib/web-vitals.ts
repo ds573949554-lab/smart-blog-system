@@ -1,6 +1,6 @@
-import { onCLS, onFCP, onFID, onINP, onLCP, onTTFB } from 'web-vitals';
+import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
 
-type MetricType = 'CLS' | 'FCP' | 'FID' | 'INP' | 'LCP' | 'TTFB';
+type MetricType = 'CLS' | 'FCP' | 'INP' | 'LCP' | 'TTFB';
 
 interface WebVitalsMetric {
   name: MetricType;
@@ -14,7 +14,6 @@ interface WebVitalsMetric {
 const THRESHOLDS = {
   CLS: { good: 0.1, poor: 0.25 },
   FCP: { good: 1800, poor: 3000 },
-  FID: { good: 100, poor: 300 },
   INP: { good: 200, poor: 500 },
   LCP: { good: 2500, poor: 4000 },
   TTFB: { good: 800, poor: 1800 },
@@ -69,16 +68,6 @@ export function initWebVitals() {
       });
     });
 
-    onFID((metric) => {
-      sendToAnalytics({
-        name: 'FID',
-        value: metric.value,
-        rating: getRating('FID', metric.value),
-        delta: metric.delta,
-        id: metric.id,
-      });
-    });
-
     onINP((metric) => {
       sendToAnalytics({
         name: 'INP',
@@ -120,7 +109,6 @@ export interface PerformanceReport {
   metrics: {
     cls?: number;
     fcp?: number;
-    fid?: number;
     inp?: number;
     lcp?: number;
     ttfb?: number;
@@ -128,7 +116,6 @@ export interface PerformanceReport {
   ratings: {
     cls?: 'good' | 'needs-improvement' | 'poor';
     fcp?: 'good' | 'needs-improvement' | 'poor';
-    fid?: 'good' | 'needs-improvement' | 'poor';
     inp?: 'good' | 'needs-improvement' | 'poor';
     lcp?: 'good' | 'needs-improvement' | 'poor';
     ttfb?: 'good' | 'needs-improvement' | 'poor';
@@ -148,7 +135,7 @@ export function getPerformanceReport(): Promise<PerformanceReport> {
     // 收集所有指标
     const metrics: Partial<Record<MetricType, WebVitalsMetric>> = {};
     let collectedCount = 0;
-    const totalMetrics = 6;
+    const totalMetrics = 5;
 
     const checkComplete = () => {
       if (collectedCount >= totalMetrics) {
@@ -180,20 +167,6 @@ export function getPerformanceReport(): Promise<PerformanceReport> {
       };
       report.metrics.fcp = metric.value;
       report.ratings.fcp = metrics.FCP.rating;
-      collectedCount++;
-      checkComplete();
-    });
-
-    onFID((metric) => {
-      metrics.FID = {
-        name: 'FID',
-        value: metric.value,
-        rating: getRating('FID', metric.value),
-        delta: metric.delta,
-        id: metric.id,
-      };
-      report.metrics.fid = metric.value;
-      report.ratings.fid = metrics.FID.rating;
       collectedCount++;
       checkComplete();
     });
