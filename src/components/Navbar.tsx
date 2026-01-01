@@ -62,7 +62,7 @@ export function Navbar() {
               />
             </motion.div>
             <div className="hidden md:block">
-              <h1 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+              <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 双铭策划
               </h1>
               <p className="text-xs text-muted-foreground">合伙公司</p>
