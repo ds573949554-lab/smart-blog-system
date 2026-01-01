@@ -20,24 +20,24 @@ export const authOptions: NextAuthOptions = {
     signIn: '/auth/signin',
   },
   session: {
-    strategy: 'database',
+    strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 天
   },
-  cookies: {
-    sessionToken: {
-      name: `next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: true, // 生产环境必须使用 HTTPS
-      },
-    },
-  },
   callbacks: {
-    async session({ session, user }) {
+    async jwt({ token, user, account }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
       if (session.user) {
-        session.user.id = user.id;
+        session.user.id = token.id as string;
+        session.user.email = token.email as string;
       }
       return session;
     },
