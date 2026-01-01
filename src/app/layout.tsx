@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import "./globals.css";
 import { TRPCProvider } from "@/lib/trpc/Provider";
@@ -13,6 +13,15 @@ const Footer = dynamic(() => import("@/components/Footer").then(mod => ({ defaul
   loading: () => <div className="h-96" />,
   ssr: true,
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  // 支持横屏和竖屏
+  viewportFit: 'cover',
+};
 
 export const metadata: Metadata = {
   title: {
