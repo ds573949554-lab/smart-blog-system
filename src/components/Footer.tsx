@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const footerLinks = {
   company: {
@@ -67,10 +68,15 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="inline-flex items-center space-x-3 mb-6 group">
               <motion.div
-                className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg"
+                className="w-14 h-14 flex items-center justify-center"
                 whileHover={{ scale: 1.05, rotate: 5 }}
               >
-                <span className="text-white font-bold text-2xl">双铭</span>
+                <Image
+                  src="/shuangming-logo.svg"
+                  alt="双铭策划Logo"
+                  width={56}
+                  height={56}
+                />
               </motion.div>
               <div>
                 <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">

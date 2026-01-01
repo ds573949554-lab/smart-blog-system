@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import Image from 'next/image';
 
 const navItems = [
   { name: '首页', href: '/' },
@@ -45,11 +47,17 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <motion.div
-              className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg"
+              className="w-12 h-12 flex items-center justify-center"
               whileHover={{ scale: 1.05, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="text-white font-bold text-xl">双铭</span>
+              <Image
+                src="/shuangming-logo.svg"
+                alt="双铭策划Logo"
+                width={48}
+                height={48}
+                priority
+              />
             </motion.div>
             <div className="hidden md:block">
               <h1 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
@@ -88,8 +96,9 @@ export function Navbar() {
             })}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
+          {/* Language Switcher & CTA Button */}
+          <div className="hidden lg:flex items-center gap-3">
+            <LanguageSwitcher />
             <Button asChild className="shadow-lg">
               <Link href="/contact">立即咨询</Link>
             </Button>
@@ -158,7 +167,10 @@ export function Navbar() {
                     </Link>
                   );
                 })}
-                <div className="pt-2">
+                <div className="pt-2 space-y-2">
+                  <div className="px-4">
+                    <LanguageSwitcher />
+                  </div>
                   <Button asChild className="w-full">
                     <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                       立即咨询

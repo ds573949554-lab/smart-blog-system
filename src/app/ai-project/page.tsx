@@ -126,7 +126,7 @@ export default function AIProjectPage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl blur-xl"
                      style={{ background: `linear-gradient(135deg, ${phase.color.split(' ')[1]}, ${phase.color.split(' ')[3]})` }} />
-                <div className="relative bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 md:p-8 h-full hover:border-white/30 transition-all duration-300">
+                <div className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 md:p-8 h-full hover:border-white/40 transition-all duration-300">
                   <div className={`inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r ${phase.color} text-white text-xs md:text-sm font-semibold mb-4`}>
                     {phase.phase}
                   </div>
@@ -158,13 +158,13 @@ export default function AIProjectPage() {
               viewport={{ once: true }}
             >
               <h3 className="text-3xl font-bold text-white mb-6">月度运营预算</h3>
-              <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl overflow-hidden">
+              <div className="bg-white/15 backdrop-blur-lg border border-white/25 rounded-2xl overflow-hidden">
                 <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4">
                   <h4 className="text-white font-semibold">优化后总成本：¥700/月</h4>
                 </div>
                 <div className="p-6 space-y-4">
                   {budget.map((item, index) => (
-                    <div key={index} className={`pb-4 ${index !== budget.length - 1 ? 'border-b border-white/10' : ''}`}>
+                    <div key={index} className={`pb-4 ${index !== budget.length - 1 ? 'border-b border-white/25' : ''}`}>
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-white font-semibold">{item.item}</span>
                         <span className="text-blue-400 font-bold">{item.cost}</span>
@@ -183,13 +183,13 @@ export default function AIProjectPage() {
               viewport={{ once: true }}
             >
               <h3 className="text-3xl font-bold text-white mb-6">12 个月收入预测</h3>
-              <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl overflow-hidden">
+              <div className="bg-white/15 backdrop-blur-lg border border-white/25 rounded-2xl overflow-hidden">
                 <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-4">
                   <h4 className="text-white font-semibold">年度目标：¥870,000</h4>
                 </div>
                 <div className="p-6 space-y-4">
                   {revenue.map((item, index) => (
-                    <div key={index} className={`pb-4 ${index !== revenue.length - 1 ? 'border-b border-white/10' : ''}`}>
+                    <div key={index} className={`pb-4 ${index !== revenue.length - 1 ? 'border-b border-white/25' : ''}`}>
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-white font-semibold">{item.month}</span>
                         <span className="text-green-400 font-bold text-xl">{item.amount}</span>
@@ -236,7 +236,7 @@ export default function AIProjectPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-5 md:p-6 hover:border-white/30 transition-all duration-300 group"
+                className="bg-white/15 backdrop-blur-lg border border-white/25 rounded-xl p-5 md:p-6 hover:border-white/45 transition-all duration-300 group"
               >
                 <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${tech.color} flex items-center justify-center text-2xl md:text-3xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   {tech.icon}

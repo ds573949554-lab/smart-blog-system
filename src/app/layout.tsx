@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import "./globals.css";
 import { TRPCProvider } from "@/lib/trpc/Provider";
+import { I18nProvider } from "@/lib/i18n/I18nContext";
 import { Navbar } from "@/components/Navbar";
 import { WebVitalsReporter } from "@/components/WebVitalsReporter";
 import { AIChat } from "@/components/AIChat";
@@ -36,13 +37,15 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <TRPCProvider>
-          <WebVitalsReporter />
-          <Navbar />
-          <main className="pt-20">{children}</main>
-          <Footer />
-          <AIChat />
-        </TRPCProvider>
+        <I18nProvider>
+          <TRPCProvider>
+            <WebVitalsReporter />
+            <Navbar />
+            <main className="pt-20">{children}</main>
+            <Footer />
+            <AIChat />
+          </TRPCProvider>
+        </I18nProvider>
       </body>
     </html>
   );
