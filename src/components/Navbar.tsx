@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
@@ -18,7 +18,8 @@ export function Navbar() {
   const { t } = useI18n();
   const { data: session, status } = useSession();
 
-  const navItems = [
+  // 使用 useMemo 确保 navItems 在语言切换时重新计算
+  const navItems = useMemo(() => [
     { name: t.nav.home, href: '/' },
     { name: t.nav.about, href: '/about' },
     { name: t.nav.services, href: '/services' },
@@ -26,7 +27,7 @@ export function Navbar() {
     { name: t.nav.cases, href: '/posts' },
     { name: t.nav.team, href: '/team' },
     { name: t.nav.contact, href: '/contact' },
-  ];
+  ], [t]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -116,7 +117,7 @@ export function Navbar() {
             {status === 'loading' ? (
               <Button disabled variant="ghost" className="gap-2">
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-                加载中...
+                {t.auth.loading}
               </Button>
             ) : session ? (
               <div className="flex items-center gap-3">
@@ -130,14 +131,14 @@ export function Navbar() {
                   className="gap-2 shadow-lg"
                 >
                   <LogOut className="h-4 w-4" />
-                  退出登录
+                  {t.auth.logout}
                 </Button>
               </div>
             ) : (
               <Button asChild variant="default" className="gap-2 shadow-lg">
                 <Link href="/auth/signin">
                   <LogIn className="h-4 w-4" />
-                  登录
+                  {t.auth.login}
                 </Link>
               </Button>
             )}
@@ -165,7 +166,7 @@ export function Navbar() {
                 className="h-8 px-2 gap-1 text-sm"
               >
                 <LogOut className="h-4 w-4" />
-                <span className="hidden sm:inline">退出</span>
+                <span className="hidden sm:inline">{t.auth.logout}</span>
               </Button>
             ) : (
               <Button
@@ -176,7 +177,7 @@ export function Navbar() {
               >
                 <Link href="/auth/signin">
                   <LogIn className="h-4 w-4" />
-                  <span>登录</span>
+                  <span>{t.auth.login}</span>
                 </Link>
               </Button>
             )}
@@ -251,7 +252,7 @@ export function Navbar() {
                     {status === 'loading' ? (
                       <Button disabled className="w-full gap-2">
                         <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                        加载中...
+                        {t.auth.loading}
                       </Button>
                     ) : session ? (
                       <>
@@ -268,14 +269,14 @@ export function Navbar() {
                           className="w-full gap-2"
                         >
                           <LogOut className="h-4 w-4" />
-                          退出登录
+                          {t.auth.logout}
                         </Button>
                       </>
                     ) : (
                       <Button asChild className="w-full gap-2">
                         <Link href="/auth/signin" onClick={() => setIsMobileMenuOpen(false)}>
                           <LogIn className="h-4 w-4" />
-                          登录
+                          {t.auth.login}
                         </Link>
                       </Button>
                     )}
