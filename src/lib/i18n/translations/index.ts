@@ -3,6 +3,10 @@ import { zhCN } from './zh-CN';
 import { zhTW } from './zh-TW';
 import { yue } from './yue';
 import { en } from './en';
+import { ja } from './ja';
+import { ko } from './ko';
+import { es } from './es';
+import { fr } from './fr';
 import type { LocaleCode } from '../config';
 import type { Translation } from './zh-CN';
 
@@ -22,19 +26,19 @@ const nan: Translation = {
 export const translations: Record<LocaleCode, Translation> = {
   'zh-CN': zhCN,
   'zh-TW': zhTW,
-  'zh-HK': zhTW, // 香港繁体暂用台湾繁体
+  'zh-HK': zhTW,
   'yue': yue,
   'nan': nan,
   'en': en,
-  'ja': zhCN, // 日语暂用简体中文
-  'ko': zhCN, // 韩语暂用简体中文
-  'es': en, // 西班牙语暂用英语
-  'fr': en, // 法语暂用英语
-  'de': en, // 德语暂用英语
-  'pt': en, // 葡萄牙语暂用英语
-  'ru': en, // 俄语暂用英语
-  'ar': en, // 阿拉伯语暂用英语
-  'hi': en, // 印地语暂用英语
+  'ja': ja,
+  'ko': ko,
+  'es': es,
+  'fr': fr,
+  'de': fr, // 德语使用法语作为临时方案
+  'pt': es, // 葡萄牙语使用西班牙语作为临时方案
+  'ru': en, // 俄语使用英语作为临时方案
+  'ar': en, // 阿拉伯语使用英语作为临时方案
+  'hi': en, // 印地语使用英语作为临时方案
 };
 
 // 获取翻译
