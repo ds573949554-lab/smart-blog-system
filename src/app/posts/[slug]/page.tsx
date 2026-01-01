@@ -21,8 +21,8 @@ export default function PostDetailPage() {
   const post = posts?.find((p) => p.slug === slug);
 
   // 解析多媒体内容
-  const images = post?.images ? JSON.parse(post.images) as string[] : [];
-  const videos = post?.videos ? JSON.parse(post.videos) as string[] : [];
+  const images = (post as any)?.images ? JSON.parse((post as any).images) as string[] : [];
+  const videos = (post as any)?.videos ? JSON.parse((post as any).videos) as string[] : [];
 
   // 复制链接功能
   const copyLink = () => {
