@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useI18n } from '@/lib/i18n/I18nContext';
 import { trpc } from '@/lib/trpc/client';
 import Image from 'next/image';
+import { Target, Palette, TrendingUp, Database, Lightbulb, Rocket, Zap } from 'lucide-react';
 
 // 服务和统计数据将从翻译系统动态获取
 
@@ -29,30 +30,38 @@ export default function HomePage() {
   const { data: posts } = trpc.post.getAll.useQuery();
   const latestPosts = posts?.slice(0, 3) || [];
 
+  // 服务图标组件
+  const serviceIcons = {
+    strategy: <Target className="w-8 h-8" />,
+    branding: <Palette className="w-8 h-8" />,
+    marketing: <TrendingUp className="w-8 h-8" />,
+    digital: <Zap className="w-8 h-8" />,
+  };
+
   // 动态获取服务数据
   const services = [
     {
       title: t.services.strategy.title,
       description: t.services.strategy.description,
-      icon: '🎯',
+      icon: serviceIcons.strategy,
       color: 'from-blue-500 to-cyan-500',
     },
     {
       title: t.services.branding.title,
       description: t.services.branding.description,
-      icon: '🎨',
+      icon: serviceIcons.branding,
       color: 'from-purple-500 to-pink-500',
     },
     {
       title: t.services.marketing.title,
       description: t.services.marketing.description,
-      icon: '📈',
+      icon: serviceIcons.marketing,
       color: 'from-orange-500 to-red-500',
     },
     {
       title: t.services.digital.title,
       description: t.services.digital.description,
-      icon: '💻',
+      icon: serviceIcons.digital,
       color: 'from-green-500 to-emerald-500',
     },
   ];
@@ -194,7 +203,7 @@ export default function HomePage() {
                 <Card className="h-full premium-card shine-effect">
                   <CardContent className="p-8">
                     <motion.div
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-3xl mb-6 shadow-premium`}
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-white mb-6 shadow-premium`}
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
