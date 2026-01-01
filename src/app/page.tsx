@@ -63,7 +63,7 @@ export default function HomePage() {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] md:min-h-[90vh] flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10">
+      <section className="relative min-h-[90vh] flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 -left-48 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
@@ -78,30 +78,14 @@ export default function HomePage() {
           >
             <motion.div
               variants={fadeInUp}
-              className="inline-block mb-4 px-6 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm md:text-base"
+              className="inline-block mb-6 px-6 py-2 bg-primary/10 rounded-full text-primary font-semibold"
             >
               {t.home.heroTag}
             </motion.div>
 
-            {/* 手机端公司名 - 渐变色设计，不换行 */}
-            <motion.div
-              variants={fadeInUp}
-              className="mb-4 md:hidden px-4"
-            >
-              <h2
-                className="text-2xl font-black bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent whitespace-nowrap"
-                style={{
-                  fontFamily: 'PingFang SC, Microsoft YaHei, sans-serif',
-                  letterSpacing: '0.02em'
-                }}
-              >
-                双铭策划合伙公司
-              </h2>
-            </motion.div>
-
             <motion.h1
               variants={fadeInUp}
-              className="hidden md:block text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
             >
               {t.home.heroTitle}
             </motion.h1>
