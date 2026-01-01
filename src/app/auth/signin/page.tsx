@@ -5,15 +5,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Github } from 'lucide-react';
 import Image from 'next/image';
+import { useI18n } from '@/lib/i18n/I18nContext';
 
 export default function SignInPage() {
+  const { t } = useI18n();
+
   return (
     <div className="container mx-auto px-4 py-12 flex items-center justify-center min-h-screen">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-gradient-text bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">欢迎回来</CardTitle>
+          <CardTitle className="text-3xl font-gradient-text bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            {t.auth.signInTitle}
+          </CardTitle>
           <CardDescription>
-            选择一个平台登录以发布您的成功案例
+            {t.auth.signInDescription}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -51,7 +56,7 @@ export default function SignInPage() {
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               />
             </svg>
-            使用 Google 登录
+            {t.auth.signInWithGoogle}
           </Button>
 
           <div className="relative">
@@ -60,20 +65,22 @@ export default function SignInPage() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                更多平台即将推出
+                {t.auth.morePlatformsComing}
               </span>
             </div>
           </div>
 
           <div className="text-center text-sm text-muted-foreground">
-            <p>登录即表示您同意我们的</p>
+            <p>{t.auth.signInAgreement}</p>
             <p className="mt-1">
               <a href="/terms" className="underline hover:text-primary">
-                服务条款
+                {t.auth.termsOfService}
               </a>
-              {' 和 '}
+              {' '}
+              {t.auth.and}
+              {' '}
               <a href="/privacy" className="underline hover:text-primary">
-                隐私政策
+                {t.auth.privacyPolicy}
               </a>
             </p>
           </div>

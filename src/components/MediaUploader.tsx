@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { X, Upload, Image as ImageIcon, Video } from 'lucide-react';
 import Image from 'next/image';
+import { useI18n } from '@/lib/i18n/I18nContext';
 
 interface MediaUploaderProps {
   onUploadComplete: (urls: string[]) => void;
@@ -19,6 +20,7 @@ export function MediaUploader({
   acceptImages = true,
   acceptVideos = true,
 }: MediaUploaderProps) {
+  const { t } = useI18n();
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
@@ -86,7 +88,7 @@ export function MediaUploader({
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || '上传失败');
+        throw new Error(error.error || t.auth.uploadFailed || '上传失败');
       }
 
       const data = await response.json();
@@ -100,7 +102,7 @@ export function MediaUploader({
       onUploadComplete(data.urls);
     } catch (error) {
       console.error('上传失败:', error);
-      alert(error instanceof Error ? error.message : '上传失败，请重试');
+      alert(error instanceof Error ? error.message : t.auth.uploadRetry || '上传失败，请重试');
     } finally {
       setUploading(false);
       setUploadProgress(0);
@@ -129,17 +131,17 @@ export function MediaUploader({
         />
         <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
         <h3 className="text-lg font-semibold mb-2">
-          {isDragging ? '放开以上传文件' : '点击或拖拽文件到此处'}
+          {isDragging ? t.auth.dragToUpload || '放开以上传文件' : t.auth.clickOrDrag || '点击或拖拽文件到此处'}
         </h3>
         <p className="text-sm text-muted-foreground">
-          支持
-          {acceptImages && ' 图片'}
-          {acceptImages && acceptVideos && ' 和'}
-          {acceptVideos && ' 视频'}
-          ，最多 {maxFiles} 个文件
+          {t.auth.supports || '支持'}
+          {acceptImages && ` ${t.auth.images || '图片'}`}
+          {acceptImages && acceptVideos && ` ${t.auth.and || '和'}`}
+          {acceptVideos && ` ${t.auth.videos || '视频'}`}
+          {`，${t.auth.maxFiles || '最多'} ${maxFiles} ${t.auth.files || '个文件'}`}
         </p>
         <p className="text-xs text-muted-foreground mt-2">
-          图片最大 10MB，视频最大 60MB（约1分钟）
+          {t.auth.fileSizeLimit || '图片最大 10MB，视频最大 60MB（约1分钟）'}
         </p>
       </Card>
 
@@ -163,7 +165,7 @@ export function MediaUploader({
                   ) : (
                     <Image
                       src={preview}
-                      alt={`预览 ${index + 1}`}
+                      alt={`${t.auth.preview || '预览'} ${index + 1}`}
                       fill
                       className="object-cover"
                     />
@@ -193,7 +195,10 @@ export function MediaUploader({
             disabled={uploading}
             className="flex-1"
           >
-            {uploading ? `上传中... ${uploadProgress}%` : `上传 ${files.length} 个文件`}
+            {uploading
+              ? `${t.auth.uploading || '上传中...'} ${uploadProgress}%`
+              : `${t.auth.upload || '上传'} ${files.length} ${t.auth.files || '个文件'}`
+            }
           </Button>
           <Button
             variant="outline"
@@ -204,7 +209,7 @@ export function MediaUploader({
             }}
             disabled={uploading}
           >
-            清空
+            {t.auth.clear || '清空'}
           </Button>
         </div>
       )}

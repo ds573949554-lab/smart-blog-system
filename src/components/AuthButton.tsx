@@ -12,14 +12,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { LogIn, LogOut, User } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nContext';
 
 export function AuthButton() {
   const { data: session, status } = useSession();
+  const { t } = useI18n();
 
   if (status === 'loading') {
     return (
       <Button variant="ghost" disabled>
-        加载中...
+        {t.auth.loading}
       </Button>
     );
   }
@@ -39,7 +41,7 @@ export function AuthButton() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>我的账户</DropdownMenuLabel>
+          <DropdownMenuLabel>{t.auth.myAccount}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem disabled>
             <User className="mr-2 h-4 w-4" />
@@ -48,7 +50,7 @@ export function AuthButton() {
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => signOut()}>
             <LogOut className="mr-2 h-4 w-4" />
-            退出登录
+            {t.auth.logout}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -62,7 +64,7 @@ export function AuthButton() {
       className="gap-2"
     >
       <LogIn className="h-4 w-4" />
-      登录
+      {t.auth.login}
     </Button>
   );
 }

@@ -390,6 +390,41 @@ export const zhCN = {
     commentsSection: '评论区域',
     leaveComment: '发表评论',
   },
+
+  // 认证相关
+  auth: {
+    signInTitle: '欢迎回来',
+    signInDescription: '选择一个平台登录以发布您的成功案例',
+    signInWithGoogle: '使用 Google 登录',
+    morePlatformsComing: '更多平台即将推出',
+    signInAgreement: '登录即表示您同意我们的',
+    termsOfService: '服务条款',
+    and: '和',
+    privacyPolicy: '隐私政策',
+    loading: '加载中...',
+    login: '登录',
+    logout: '退出登录',
+    myAccount: '我的账户',
+    commentRequired: '评论内容不能为空',
+    commentPlaceholder: '写下你的想法...',
+    commentSubmit: '发送评论',
+    commentSending: '发送中...',
+    // 媒体上传器
+    dragToUpload: '放开以上传文件',
+    clickOrDrag: '点击或拖拽文件到此处',
+    supports: '支持',
+    images: '图片',
+    videos: '视频',
+    maxFiles: '最多',
+    files: '个文件',
+    fileSizeLimit: '图片最大 10MB，视频最大 60MB（约1分钟）',
+    preview: '预览',
+    upload: '上传',
+    uploading: '上传中',
+    uploadFailed: '上传失败',
+    uploadRetry: '上传失败，请重试',
+    clear: '清空',
+  },
 };
 
 export type Translation = typeof zhCN;
