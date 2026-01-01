@@ -83,14 +83,20 @@ export default function HomePage() {
               {t.home.heroTag}
             </motion.div>
 
-            {/* 小字公司名 - 解决手机端换行问题 */}
+            {/* 手机端公司名 - 渐变色设计，不换行 */}
             <motion.div
               variants={fadeInUp}
-              className="mb-3 md:hidden"
+              className="mb-4 md:hidden px-4"
             >
-              <p className="text-lg font-black text-foreground tracking-wide" style={{ fontFamily: 'PingFang SC, Microsoft YaHei, sans-serif' }}>
+              <h2
+                className="text-2xl font-black bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent whitespace-nowrap"
+                style={{
+                  fontFamily: 'PingFang SC, Microsoft YaHei, sans-serif',
+                  letterSpacing: '0.02em'
+                }}
+              >
                 双铭策划合伙公司
-              </p>
+              </h2>
             </motion.div>
 
             <motion.h1
