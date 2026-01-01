@@ -235,9 +235,9 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">最新案例</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.home.latestCasesTitle}</h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                查看我们最新的成功案例，了解我们如何为客户创造价值
+                {t.home.latestCasesSubtitle}
               </p>
             </motion.div>
 
@@ -293,7 +293,7 @@ export default function HomePage() {
               viewport={{ once: true }}
             >
               <Button asChild size="lg" variant="outline">
-                <Link href="/posts">查看全部案例 →</Link>
+                <Link href="/posts">{t.home.viewAllCases} →</Link>
               </Button>
             </motion.div>
           </div>
