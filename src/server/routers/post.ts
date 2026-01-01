@@ -80,7 +80,7 @@ export const postRouter = router({
           images: input.images || '[]',
           videos: input.videos || '[]',
           livePhotos: input.livePhotos || '[]',
-        },
+        } as any, // 临时类型断言，等待Vercel数据库更新
       });
     }),
 
