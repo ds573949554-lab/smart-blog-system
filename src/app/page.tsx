@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useI18n } from '@/lib/i18n/I18nContext';
+import { trpc } from '@/lib/trpc/client';
+import Image from 'next/image';
 
 // 服务和统计数据将从翻译系统动态获取
 
@@ -24,6 +26,8 @@ const staggerChildren = {
 
 export default function HomePage() {
   const { t } = useI18n();
+  const { data: posts } = trpc.post.getAll.useQuery();
+  const latestPosts = posts?.slice(0, 3) || [];
 
   // 动态获取服务数据
   const services = [
@@ -220,6 +224,81 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Latest Cases Section */}
+      {latestPosts.length > 0 && (
+        <section className="py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
+          <div className="container mx-auto px-4">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">最新案例</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                查看我们最新的成功案例，了解我们如何为客户创造价值
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              {latestPosts.map((post, index) => {
+                const images = (post as any)?.images ? JSON.parse((post as any).images) as string[] : [];
+                return (
+                  <motion.div
+                    key={post.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link href={`/posts/${post.slug}`}>
+                      <Card className="h-full hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden">
+                        {/* 图片预览 */}
+                        {images.length > 0 && (
+                          <div className="relative aspect-video overflow-hidden">
+                            <img
+                              src={images[0]}
+                              alt={post.title}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                          </div>
+                        )}
+                        <CardContent className="p-6">
+                          <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                            {post.title}
+                          </h3>
+                          <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+                            {post.content.substring(0, 150)}...
+                          </p>
+                          <div className="flex items-center justify-between text-xs text-muted-foreground">
+                            <span>{post.author.name || post.author.email}</span>
+                            <time>
+                              {new Date(post.createdAt).toLocaleDateString('zh-CN')}
+                            </time>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            <motion.div
+              className="text-center"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <Button asChild size="lg" variant="outline">
+                <Link href="/posts">查看全部案例 →</Link>
+              </Button>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-br from-primary via-secondary to-accent text-white">
