@@ -6,22 +6,24 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { useI18n } from '@/lib/i18n/I18nContext';
 import Image from 'next/image';
-
-const navItems = [
-  { name: '首页', href: '/' },
-  { name: '关于我们', href: '/about' },
-  { name: '服务项目', href: '/services' },
-  { name: 'AI 团队系统', href: '/ai-project' },
-  { name: '成功案例', href: '/posts' },
-  { name: '团队介绍', href: '/team' },
-  { name: '联系我们', href: '/contact' },
-];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useI18n();
+
+  const navItems = [
+    { name: t.nav.home, href: '/' },
+    { name: t.nav.about, href: '/about' },
+    { name: t.nav.services, href: '/services' },
+    { name: t.nav.aiProject, href: '/ai-project' },
+    { name: t.nav.cases, href: '/posts' },
+    { name: t.nav.team, href: '/team' },
+    { name: t.nav.contact, href: '/contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,7 +102,7 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <LanguageSwitcher />
             <Button asChild className="shadow-lg">
-              <Link href="/contact">立即咨询</Link>
+              <Link href="/contact">{t.nav.consultation}</Link>
             </Button>
           </div>
 
@@ -173,7 +175,7 @@ export function Navbar() {
                   </div>
                   <Button asChild className="w-full">
                     <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                      立即咨询
+                      {t.nav.consultation}
                     </Link>
                   </Button>
                 </div>

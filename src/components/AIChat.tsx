@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useI18n } from '@/lib/i18n/I18nContext'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -12,17 +13,21 @@ interface Message {
 }
 
 export function AIChat() {
+  const { t, locale } = useI18n()
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: '您好！我是双铭策划的AI助手。有什么可以帮助您的吗？',
-      timestamp: new Date()
-    }
-  ])
+  const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // 初始化欢迎消息（当语言改变时更新）
+  useEffect(() => {
+    setMessages([{
+      role: 'assistant',
+      content: t.chat.welcome,
+      timestamp: new Date()
+    }])
+  }, [t.chat.welcome])
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -51,7 +56,10 @@ export function AIChat() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({
+          message: input,
+          locale: locale // 发送当前语言给API
+        }),
       })
 
       const data = await response.json()
@@ -66,7 +74,7 @@ export function AIChat() {
       } else {
         const errorMessage: Message = {
           role: 'assistant',
-          content: '抱歉，服务暂时不可用。请稍后再试或发送邮件至 shuangmingd2@gmail.com',
+          content: t.chat.error,
           timestamp: new Date()
         }
         setMessages(prev => [...prev, errorMessage])
@@ -74,7 +82,7 @@ export function AIChat() {
     } catch (error) {
       const errorMessage: Message = {
         role: 'assistant',
-        content: '网络错误，请检查您的连接后重试',
+        content: t.chat.networkError,
         timestamp: new Date()
       }
       setMessages(prev => [...prev, errorMessage])
@@ -102,7 +110,7 @@ export function AIChat() {
         <Button
           onClick={() => setIsOpen(!isOpen)}
           className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-premium-lg premium-button text-xl md:text-2xl"
-          aria-label="AI 客服"
+          aria-label={t.chat.title}
         >
           {isOpen ? '✕' : '💬'}
         </Button>
@@ -125,8 +133,8 @@ export function AIChat() {
                   🤖
                 </div>
                 <div>
-                  <h3 className="font-bold text-sm md:text-base">双铭策划 AI 助手</h3>
-                  <p className="text-[10px] md:text-xs text-white/80">智谱 GLM-4-Plus 驱动</p>
+                  <h3 className="font-bold text-sm md:text-base">{t.chat.title}</h3>
+                  <p className="text-[10px] md:text-xs text-white/80">{t.chat.poweredBy}</p>
                 </div>
               </div>
             </div>
@@ -182,7 +190,7 @@ export function AIChat() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="输入您的问题..."
+                  placeholder={t.chat.placeholder}
                   className="flex-1 text-sm md:text-base"
                   disabled={isLoading}
                 />
@@ -191,11 +199,11 @@ export function AIChat() {
                   disabled={!input.trim() || isLoading}
                   className="px-4 md:px-6 text-sm md:text-base"
                 >
-                  发送
+                  {t.chat.send}
                 </Button>
               </div>
               <p className="text-[10px] md:text-xs text-gray-400 mt-2 text-center">
-                支持智能回复 · 24/7 在线服务
+                {t.chat.support}
               </p>
             </div>
           </motion.div>

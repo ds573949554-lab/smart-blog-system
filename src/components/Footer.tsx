@@ -3,34 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-
-const footerLinks = {
-  company: {
-    title: '公司信息',
-    links: [
-      { name: '关于我们', href: '/about' },
-      { name: '团队介绍', href: '/team' },
-      { name: '联系我们', href: '/contact' },
-    ],
-  },
-  services: {
-    title: '服务项目',
-    links: [
-      { name: '战略策划', href: '/services#strategy' },
-      { name: '品牌设计', href: '/services#branding' },
-      { name: '营销推广', href: '/services#marketing' },
-      { name: '数字化解决方案', href: '/services#digital' },
-    ],
-  },
-  resources: {
-    title: '资源中心',
-    links: [
-      { name: '成功案例', href: '/posts' },
-      { name: '行业洞察', href: '/posts' },
-      { name: '客户评价', href: '/posts' },
-    ],
-  },
-};
+import { useI18n } from '@/lib/i18n/I18nContext';
 
 const socialLinks = [
   {
@@ -60,6 +33,36 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { t } = useI18n();
+
+  const footerLinks = {
+    company: {
+      title: t.footer.company,
+      links: [
+        { name: t.nav.about, href: '/about' },
+        { name: t.nav.team, href: '/team' },
+        { name: t.nav.contact, href: '/contact' },
+      ],
+    },
+    services: {
+      title: t.footer.services,
+      links: [
+        { name: t.services.strategy.title, href: '/services#strategy' },
+        { name: t.services.branding.title, href: '/services#branding' },
+        { name: t.services.marketing.title, href: '/services#marketing' },
+        { name: t.services.digital.title, href: '/services#digital' },
+      ],
+    },
+    resources: {
+      title: t.footer.resources,
+      links: [
+        { name: t.nav.cases, href: '/posts' },
+        { name: t.nav.cases, href: '/posts' },
+        { name: t.nav.cases, href: '/posts' },
+      ],
+    },
+  };
+
   return (
     <footer className="bg-gradient-to-b from-muted/30 to-muted/60 border-t border-border mt-20">
       <div className="container mx-auto px-4 py-16">
@@ -86,7 +89,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-sm text-muted-foreground mb-6 max-w-md">
-              专注于为企业提供专业的策划、设计和营销服务，助力品牌成长，创造商业价值。
+              {t.footer.description}
             </p>
             {/* Social Links */}
             <div className="flex space-x-4">
@@ -128,17 +131,17 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} 双铭策划合伙公司. 保留所有权利.
+              © {new Date().getFullYear()} {t.home.heroTitle}. {t.footer.rights}.
             </p>
             <div className="flex space-x-6 text-sm text-muted-foreground">
               <Link href="/privacy" className="hover:text-primary transition-colors">
-                隐私政策
+                {t.footer.privacy}
               </Link>
               <Link href="/terms" className="hover:text-primary transition-colors">
-                服务条款
+                {t.footer.terms}
               </Link>
               <Link href="/sitemap" className="hover:text-primary transition-colors">
-                网站地图
+                {t.footer.sitemap}
               </Link>
             </div>
           </div>

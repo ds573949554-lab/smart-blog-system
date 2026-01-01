@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    const { message } = await request.json();
+    const { message, locale = 'zh-CN' } = await request.json();
 
     if (!message) {
       return NextResponse.json(
@@ -18,6 +18,27 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    // 语言映射表
+    const languageMap: Record<string, string> = {
+      'zh-CN': '简体中文',
+      'zh-TW': '繁体中文',
+      'zh-HK': '繁体中文（香港）',
+      'yue': '粤语（请使用粤语白话文）',
+      'nan': '闽南语',
+      'en': 'English',
+      'ja': '日本語',
+      'ko': '한국어',
+      'es': 'Español',
+      'fr': 'Français',
+      'de': 'Deutsch',
+      'pt': 'Português',
+      'ru': 'Русский',
+      'ar': 'العربية',
+      'hi': 'हिन्दी',
+    };
+
+    const responseLanguage = languageMap[locale] || '简体中文';
 
     // 调用智谱 AI API (GLM-4-Plus)
     const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
@@ -51,7 +72,7 @@ export async function POST(request: Request) {
 4. 数字化解决方案 - 网站开发、移动应用、电商平台
 5. AI 团队系统 - 14天0-1实施方案，¥700/月运营成本，年收入目标¥870,000
 
-请用专业、友好的态度回答客户咨询。如果客户想了解更多或预约咨询，引导他们：
+IMPORTANT: 请用${responseLanguage}回复客户。用专业、友好的态度回答客户咨询。如果客户想了解更多或预约咨询，引导他们：
 - 访问 /contact 页面填写咨询表单
 - 发送邮件到 shuangmingd2@gmail.com
 - 访问 LinkedIn: linkedin.com/in/shuangmingd2
