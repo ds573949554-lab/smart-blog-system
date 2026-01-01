@@ -8,29 +8,37 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 
-const contactInfo = [
+const contactInfo: Array<{
+  icon: string;
+  title: string;
+  content: string;
+  color: string;
+  link?: string;
+}> = [
   {
     icon: '📍',
     title: '公司地址',
-    content: '广东省广州市天河区珠江新城XXX大厦18楼',
+    content: '美国纽约皇后区53rd 90',
     color: 'from-blue-500 to-cyan-500',
   },
   {
-    icon: '📞',
-    title: '联系电话',
-    content: '+86 400-888-8888',
+    icon: '💼',
+    title: 'LinkedIn',
+    content: 'linkedin.com/in/shuangmingd2',
+    link: 'https://linkedin.com/in/shuangmingd2',
     color: 'from-purple-500 to-pink-500',
   },
   {
     icon: '📧',
     title: '电子邮箱',
-    content: 'contact@shuangming.com',
+    content: 'shuangmingd2@gmail.com',
+    link: 'mailto:shuangmingd2@gmail.com',
     color: 'from-orange-500 to-red-500',
   },
   {
     icon: '⏰',
     title: '工作时间',
-    content: '周一至周五 9:00-18:00',
+    content: '周一至周五 9:00-18:00 (美东时间)',
     color: 'from-green-500 to-emerald-500',
   },
 ];
@@ -121,7 +129,18 @@ export default function ContactPage() {
                       {info.icon}
                     </div>
                     <h3 className="font-bold text-lg mb-2">{info.title}</h3>
-                    <p className="text-muted-foreground text-sm">{info.content}</p>
+                    {info.link ? (
+                      <a
+                        href={info.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground text-sm hover:text-primary transition-colors underline"
+                      >
+                        {info.content}
+                      </a>
+                    ) : (
+                      <p className="text-muted-foreground text-sm">{info.content}</p>
+                    )}
                   </CardContent>
                 </Card>
               </motion.div>

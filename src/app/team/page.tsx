@@ -5,11 +5,18 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const teamMembers = [
   {
-    name: '张明',
-    role: '创始合伙人 & CEO',
+    name: '邓志铭',
+    role: '联合创始人 & 项目总监',
     avatar: '👨‍💼',
-    bio: '10年策划行业经验，曾服务多家知名企业',
-    skills: ['战略策划', '品牌咨询', '商业模式设计'],
+    bio: '10年策划行业经验，曾服务多家知名企业，擅长战略规划与项目管理',
+    skills: ['战略策划', '项目管理', '商业模式设计'],
+  },
+  {
+    name: '邓憬辰',
+    role: '联合创始人 & 项目经理',
+    avatar: '👨‍💻',
+    bio: '资深项目经理，PMP认证，确保每个项目高质量交付',
+    skills: ['项目管理', '客户沟通', '流程优化'],
   },
   {
     name: '李华',
@@ -24,13 +31,6 @@ const teamMembers = [
     avatar: '👨‍💻',
     bio: '数字营销专家，精通全渠道营销',
     skills: ['数字营销', '社交媒体', '数据分析'],
-  },
-  {
-    name: '刘芳',
-    role: '项目经理',
-    avatar: '👩‍💼',
-    bio: 'PMP认证项目经理，确保项目顺利交付',
-    skills: ['项目管理', '客户沟通', '流程优化'],
   },
   {
     name: '陈杰',
@@ -213,7 +213,7 @@ export default function TeamPage() {
                       联系我们
                     </a>
                     <a
-                      href="mailto:hr@shuangming.com"
+                      href="mailto:shuangmingd2@gmail.com"
                       className="inline-flex items-center justify-center px-8 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors"
                     >
                       发送简历

@@ -4,6 +4,7 @@ import "./globals.css";
 import { TRPCProvider } from "@/lib/trpc/Provider";
 import { Navbar } from "@/components/Navbar";
 import { WebVitalsReporter } from "@/components/WebVitalsReporter";
+import { AIChat } from "@/components/AIChat";
 
 // Footer懒加载 - 非首屏关键组件
 const Footer = dynamic(() => import("@/components/Footer").then(mod => ({ default: mod.Footer })), {
@@ -40,6 +41,7 @@ export default function RootLayout({
           <Navbar />
           <main className="pt-20">{children}</main>
           <Footer />
+          <AIChat />
         </TRPCProvider>
       </body>
     </html>
