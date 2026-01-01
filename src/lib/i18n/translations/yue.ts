@@ -14,6 +14,38 @@ export const yue: Translation = {
     consultation: '即刻咨詢',
   },
 
+  // 關於我哋
+  about: {
+    title: '關於我哋',
+    subtitle: '雙銘策劃合夥公司成立於2019年，專注為企業提供專業嘅策劃、設計同營銷服務。我哋致力於幫助品牌成長，創造商業價值。',
+    visionTitle: '我哋嘅願景',
+    visionDescription: '成為中國最具影響力嘅策劃與品牌設計公司，通過創新思維同專業服務，幫助更多企業實現品牌價值嘅提升。',
+    missionTitle: '我哋嘅使命',
+    missionDescription: '為客戶提供一站式嘅策劃與設計服務，以專業嘅態度、創新嘅思維，幫助企業喺競爭中脫穎而出，實現可持續發展。',
+    valuesTitle: '核心價值觀',
+    valuesSubtitle: '我哋堅守嘅信念與原則',
+    values: [
+      { title: '專業', description: '深耕行業多年，積累豐富嘅實戰經驗' },
+      { title: '創新', description: '緊跟時代潮流，不斷探索創新解決方案' },
+      { title: '誠信', description: '以誠信為本，建立長期合作關係' },
+      { title: '共贏', description: '與客戶共同成長，實現互利共贏' },
+    ],
+    timelineTitle: '發展歷程',
+    timelineSubtitle: '見證我哋嘅成長與進步',
+    timeline: [
+      { year: '2019', event: '公司成立，開啟創業征程' },
+      { year: '2020', event: '服務客戶突破50家' },
+      { year: '2021', event: '獲得行業最佳策劃公司獎' },
+      { year: '2022', event: '團隊擴展至30+人' },
+      { year: '2023', event: '成功案例突破200個' },
+      { year: '2024', event: '業務覆蓋全國主要城市' },
+    ],
+    ctaTitle: '期待與你合作',
+    ctaDescription: '了解更多關於我哋嘅信息，或即刻開始你嘅項目',
+    meetTeam: '認識團隊',
+    contactUs: '聯絡我哋',
+  },
+
   // 主頁
   home: {
     heroTag: '專業策劃 · 品牌設計 · 營銷推廣',
@@ -30,6 +62,9 @@ export const yue: Translation = {
     servicesTitle: '核心服務',
     servicesSubtitle: '為企業提供全方位嘅專業服務，幫品牌成長',
     viewAll: '睇晒所有服務',
+    latestCasesTitle: '最新案例',
+    latestCasesSubtitle: '睇下我哋最新嘅成功案例，了解我哋點樣為客戶創造價值',
+    viewAllCases: '睇晒全部案例',
     ctaTitle: '準備好開始你嘅品牌之旅未？',
     ctaSubtitle: '等我哋一齊創造非凡，為你嘅品牌注入新活力',
     viewCases: '睇案例',
@@ -114,6 +149,50 @@ export const yue: Translation = {
     joinDescription: '我哋一直喺度搵有才華、有熱情嘅人才。如果你對策劃、設計或營銷充滿熱情，歡迎加入我哋嘅團隊！',
     meetTeam: '認識團隊',
     sendResume: '發送簡歷',
+    members: [
+      {
+        name: '鄧志銘',
+        role: '聯合創始人 & AI項目策劃搭建師',
+        avatar: '👨‍💼',
+        bio: '10年策劃行業經驗，曾服務多家知名企業，擅長AI項目策劃與系統搭建',
+        skills: ['AI項目策劃', '系統架構搭建', '商業模式設計'],
+      },
+      {
+        name: '鄧憬辰',
+        role: '聯合創始人 & AI項目策劃搭建師',
+        avatar: '👨‍💻',
+        bio: '資深AI項目專家，專注於AI團隊系統搭建與落地實施',
+        skills: ['AI項目策劃', 'Agent系統搭建', '技術實施'],
+      },
+      {
+        name: '李華',
+        role: '創意總監',
+        avatar: '👩‍🎨',
+        bio: '資深設計師，擅長品牌視覺設計',
+        skills: ['品牌設計', 'VI設計', '創意策劃'],
+      },
+      {
+        name: '王強',
+        role: '營銷總監',
+        avatar: '👨‍💻',
+        bio: '數字營銷專家，精通全渠道營銷',
+        skills: ['數字營銷', '社交媒體', '數據分析'],
+      },
+      {
+        name: '陳傑',
+        role: '技術總監',
+        avatar: '👨‍💻',
+        bio: '全棧開發專家，引領數字化轉型',
+        skills: ['Web開發', '移動開發', '系統架構'],
+      },
+      {
+        name: '趙敏',
+        role: '內容策劃',
+        avatar: '👩‍✍️',
+        bio: '內容營銷專家，擅長品牌故事講述',
+        skills: ['內容策劃', '文案撰寫', 'SEO優化'],
+      },
+    ],
   },
 
   // 聯絡我哋
@@ -282,6 +361,36 @@ export const yue: Translation = {
       generateFailedRetry: '生成失敗，請重試',
       videoNotSupported: '你嘅瀏覽器唔支持視頻播放',
     },
+  },
+
+  // 案例列表
+  posts: {
+    title: '成功案例',
+    totalCount: '共 {count} 個案例',
+    createButton: '發布案例',
+    noCases: '仲未有案例',
+    createFirst: '發布第一個案例',
+    loading: '加載中...',
+    loadFailed: '加載失敗',
+    backToList: '返回列表',
+    readMore: '閱讀更多',
+  },
+
+  // 案例詳情
+  postDetail: {
+    notFound: '文章未找到',
+    notFoundDescription: '唔好意思，搵唔到呢篇文章',
+    backToList: '返回文章列表',
+    back: '返回',
+    share: '分享',
+    copyLink: '複製鏈接',
+    copied: '已複製！',
+    publishedAt: '發布於',
+    author: '作者',
+    comments: '評論',
+    noComments: '暫無評論',
+    commentsSection: '評論區域',
+    leaveComment: '發表評論',
   },
 
   // 認證相關

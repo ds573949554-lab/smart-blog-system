@@ -62,6 +62,9 @@ export const en: Translation = {
     servicesTitle: 'Our Services',
     servicesSubtitle: 'Comprehensive professional services to empower brand growth',
     viewAll: 'View All Services',
+    latestCasesTitle: 'Latest Case Studies',
+    latestCasesSubtitle: 'Check out our recent success stories and see how we create value for clients',
+    viewAllCases: 'View All Cases',
     ctaTitle: 'Ready to Start Your Brand Journey?',
     ctaSubtitle: 'Let\'s create excellence together and energize your brand',
     viewCases: 'View Cases',
@@ -146,6 +149,50 @@ export const en: Translation = {
     joinDescription: 'We\'re always looking for talented and passionate individuals. If you love planning, design, or marketing, join our team!',
     meetTeam: 'Meet the Team',
     sendResume: 'Send Resume',
+    members: [
+      {
+        name: 'Deng Zhiming',
+        role: 'Co-founder & AI Project Planner',
+        avatar: '👨‍💼',
+        bio: '10 years of planning industry experience, served many well-known enterprises, expert in AI project planning and system architecture',
+        skills: ['AI Project Planning', 'System Architecture', 'Business Model Design'],
+      },
+      {
+        name: 'Deng Jingchen',
+        role: 'Co-founder & AI Project Planner',
+        avatar: '👨‍💻',
+        bio: 'Senior AI project expert, focused on AI team system development and implementation',
+        skills: ['AI Project Planning', 'Agent System', 'Technical Implementation'],
+      },
+      {
+        name: 'Li Hua',
+        role: 'Creative Director',
+        avatar: '👩‍🎨',
+        bio: 'Senior designer, expert in brand visual design',
+        skills: ['Brand Design', 'VI Design', 'Creative Planning'],
+      },
+      {
+        name: 'Wang Qiang',
+        role: 'Marketing Director',
+        avatar: '👨‍💻',
+        bio: 'Digital marketing expert, proficient in omni-channel marketing',
+        skills: ['Digital Marketing', 'Social Media', 'Data Analytics'],
+      },
+      {
+        name: 'Chen Jie',
+        role: 'Technical Director',
+        avatar: '👨‍💻',
+        bio: 'Full-stack development expert, leading digital transformation',
+        skills: ['Web Development', 'Mobile Development', 'System Architecture'],
+      },
+      {
+        name: 'Zhao Min',
+        role: 'Content Planner',
+        avatar: '👩‍✍️',
+        bio: 'Content marketing expert, expert in brand storytelling',
+        skills: ['Content Planning', 'Copywriting', 'SEO Optimization'],
+      },
+    ],
   },
 
   // Contact
@@ -314,6 +361,36 @@ export const en: Translation = {
       generateFailedRetry: 'Generation failed, please retry',
       videoNotSupported: 'Your browser does not support video playback',
     },
+  },
+
+  // Posts List
+  posts: {
+    title: 'Case Studies',
+    totalCount: 'Total {count} cases',
+    createButton: 'Publish Case',
+    noCases: 'No cases yet',
+    createFirst: 'Publish your first case',
+    loading: 'Loading...',
+    loadFailed: 'Failed to load',
+    backToList: 'Back to list',
+    readMore: 'Read More',
+  },
+
+  // Post Detail
+  postDetail: {
+    notFound: 'Post not found',
+    notFoundDescription: 'Sorry, we could not find the post you were looking for',
+    backToList: 'Back to post list',
+    back: 'Back',
+    share: 'Share',
+    copyLink: 'Copy link',
+    copied: 'Copied!',
+    publishedAt: 'Published on',
+    author: 'Author',
+    comments: 'Comments',
+    noComments: 'No comments yet',
+    commentsSection: 'Comments Section',
+    leaveComment: 'Leave a Comment',
   },
 
   // Authentication
