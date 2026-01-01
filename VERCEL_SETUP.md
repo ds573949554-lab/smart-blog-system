@@ -24,17 +24,16 @@
    - 创建新的 API Key
    - 复制 API Key（只显示一次，请妥善保存）
 
-2. **在 Vercel 配置环境变量**
+3. **（可选）在 Vercel 更新环境变量**
+   - 如果更换了新的 API Key，需要更新：
    - 访问：https://vercel.com/ds573949554-labs-projects/smart-blog-system/settings/environment-variables
    - 或：Vercel Dashboard → 选择项目 → Settings → Environment Variables
-   - 点击 "Add New"
-   - 填写：
-     - **Name**: `ZHIPU_API_KEY`
-     - **Value**: 粘贴你的 API Key
-     - **Environment**: 选择 `Production`, `Preview`, `Development` (全选)
+   - 找到 `ZHIPU_API_KEY` → 点击 "Edit"
+   - 填写新的 API Key
+   - **Environment**: 全选（Production, Preview, Development）
    - 点击 "Save"
 
-3. **重新部署**
+4. **（如果更新了环境变量）重新部署**
    - 方式1：在 Vercel Dashboard → Deployments → 点击最新部署的 "..." → "Redeploy"
    - 方式2：推送新的代码到 GitHub（会自动触发部署）
 
