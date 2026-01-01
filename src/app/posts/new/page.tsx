@@ -13,6 +13,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useRouter } from 'next/navigation';
 import { MediaUploader } from '@/components/MediaUploader';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useSession } from 'next-auth/react';
 
 const postSchema = z.object({
   title: z.string().min(1, '标题不能为空'),
@@ -27,6 +28,7 @@ type PostFormData = z.infer<typeof postSchema>;
 export default function NewPostPage() {
   const router = useRouter();
   const utils = trpc.useUtils();
+  const { data: session } = useSession();
   const [isGenerating, setIsGenerating] = useState(false);
   const [generateError, setGenerateError] = useState<string | null>(null);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
@@ -61,13 +63,19 @@ export default function NewPostPage() {
 
   const onSubmit = async (data: PostFormData) => {
     setSubmitError(null);
+
+    // 检查用户是否登录
+    if (!session?.user?.id) {
+      setSubmitError('请先登录后再发布案例');
+      return;
+    }
+
     try {
-      // 使用测试用户ID（实际项目中应该从认证系统获取）
       await createPost.mutateAsync({
         ...data,
         images: JSON.stringify(uploadedImages),
         videos: JSON.stringify(uploadedVideos),
-        authorId: 'cmjtxid8r0000xxb32rwvhfhj', // 测试用户ID
+        authorId: session.user.id, // 使用真实用户ID
       });
     } catch (err) {
       // 错误已在 onError 中处理
