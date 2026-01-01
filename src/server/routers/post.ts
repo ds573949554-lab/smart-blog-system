@@ -66,6 +66,10 @@ export const postRouter = router({
         content: z.string().min(1),
         slug: z.string().min(1),
         authorId: z.string(),
+        images: z.string().optional(), // JSON字符串
+        videos: z.string().optional(), // JSON字符串
+        livePhotos: z.string().optional(), // JSON字符串
+        thumbnail: z.string().optional(),
       })
     )
     .mutation(async ({ input }) => {
@@ -73,6 +77,9 @@ export const postRouter = router({
         data: {
           ...input,
           published: true, // 默认发布
+          images: input.images || '[]',
+          videos: input.videos || '[]',
+          livePhotos: input.livePhotos || '[]',
         },
       });
     }),
