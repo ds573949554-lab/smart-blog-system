@@ -13,9 +13,13 @@ export async function POST(request: Request) {
 
     const apiKey = process.env.ZHIPU_API_KEY;
     if (!apiKey) {
+      console.error('ZHIPU_API_KEY 环境变量未配置');
       return NextResponse.json(
-        { error: 'AI 服务未配置' },
-        { status: 500 }
+        {
+          error: 'AI 服务未配置，请联系管理员',
+          details: 'ZHIPU_API_KEY not configured'
+        },
+        { status: 503 }
       );
     }
 
@@ -93,8 +97,11 @@ IMPORTANT: 请用${responseLanguage}回复客户。用专业、友好的态度�
       const errorData = await response.json();
       console.error('智谱 AI API 错误:', errorData);
       return NextResponse.json(
-        { error: 'AI 服务暂时不可用' },
-        { status: 500 }
+        {
+          error: 'AI 服务暂时不可用，请稍后再试',
+          details: errorData.error?.message || 'API call failed'
+        },
+        { status: 502 }
       );
     }
 
@@ -105,7 +112,10 @@ IMPORTANT: 请用${responseLanguage}回复客户。用专业、友好的态度�
   } catch (error) {
     console.error('AI 聊天错误:', error);
     return NextResponse.json(
-      { error: '服务器错误' },
+      {
+        error: '服务器内部错误，请稍后再试',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     );
   }
