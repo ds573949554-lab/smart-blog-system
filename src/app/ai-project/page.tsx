@@ -64,37 +64,37 @@ export default function AIProjectPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 mb-6">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-blue-200 text-sm font-medium">AI 驱动的未来企业</span>
+              <span className="text-blue-200 text-xs md:text-sm font-medium">AI 驱动的未来企业</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               AI 团队协作系统
               <br />
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 0-1 实施落地方案
               </span>
             </h1>
-            <p className="text-xl text-blue-200 max-w-3xl mx-auto mb-8 leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-blue-200 max-w-3xl mx-auto mb-8 leading-relaxed px-4">
               14 天内构建世界级 AI Agent Swarm 架构，整合 Claude Opus 4.5、Gemini 3 Pro、GPT-5.2 三大顶级模型，
               打造 10 位专家 Agent 团队，年收入目标 ¥870,000
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <div className="px-6 py-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
-                <div className="text-3xl font-bold text-white">14 天</div>
-                <div className="text-sm text-blue-200">完整部署周期</div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto">
+              <div className="px-4 py-3 md:px-6 md:py-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                <div className="text-2xl md:text-3xl font-bold text-white">14 天</div>
+                <div className="text-xs md:text-sm text-blue-200">完整部署周期</div>
               </div>
-              <div className="px-6 py-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
-                <div className="text-3xl font-bold text-white">10 位</div>
-                <div className="text-sm text-blue-200">专家 Agent</div>
+              <div className="px-4 py-3 md:px-6 md:py-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                <div className="text-2xl md:text-3xl font-bold text-white">10 位</div>
+                <div className="text-xs md:text-sm text-blue-200">专家 Agent</div>
               </div>
-              <div className="px-6 py-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
-                <div className="text-3xl font-bold text-white">200+</div>
-                <div className="text-sm text-blue-200">MCP 工具集成</div>
+              <div className="px-4 py-3 md:px-6 md:py-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                <div className="text-2xl md:text-3xl font-bold text-white">200+</div>
+                <div className="text-xs md:text-sm text-blue-200">MCP 工具集成</div>
               </div>
-              <div className="px-6 py-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
-                <div className="text-3xl font-bold text-white">¥700</div>
-                <div className="text-sm text-blue-200">月运营成本</div>
+              <div className="px-4 py-3 md:px-6 md:py-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                <div className="text-2xl md:text-3xl font-bold text-white">¥700</div>
+                <div className="text-xs md:text-sm text-blue-200">月运营成本</div>
               </div>
             </div>
           </motion.div>
@@ -114,7 +114,7 @@ export default function AIProjectPage() {
             <p className="text-blue-200 text-lg">从基础设施到商业化运营的完整路径</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {phases.map((phase, index) => (
               <motion.div
                 key={index}
@@ -126,12 +126,12 @@ export default function AIProjectPage() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl blur-xl"
                      style={{ background: `linear-gradient(135deg, ${phase.color.split(' ')[1]}, ${phase.color.split(' ')[3]})` }} />
-                <div className="relative bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 h-full hover:border-white/30 transition-all duration-300">
-                  <div className={`inline-block px-4 py-2 rounded-full bg-gradient-to-r ${phase.color} text-white text-sm font-semibold mb-4`}>
+                <div className="relative bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 md:p-8 h-full hover:border-white/30 transition-all duration-300">
+                  <div className={`inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r ${phase.color} text-white text-xs md:text-sm font-semibold mb-4`}>
                     {phase.phase}
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{phase.title}</h3>
-                  <p className="text-blue-300 mb-6">{phase.days}</p>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{phase.title}</h3>
+                  <p className="text-sm md:text-base text-blue-300 mb-6">{phase.days}</p>
                   <ul className="space-y-4">
                     {phase.tasks.map((task, idx) => (
                       <li key={idx} className="flex items-start gap-3">
@@ -223,7 +223,7 @@ export default function AIProjectPage() {
             <p className="text-blue-200 text-lg">世界顶级 AI 模型与工具生态</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
               { name: 'Claude Opus 4.5', desc: '200K 上下文，多模态推理', icon: '🧠', color: 'from-orange-500 to-red-500' },
               { name: 'Gemini 3 Pro', desc: '100 万 Token 免费额度', icon: '💎', color: 'from-blue-500 to-cyan-500' },
@@ -236,13 +236,13 @@ export default function AIProjectPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 hover:border-white/30 transition-all duration-300 group"
+                className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-5 md:p-6 hover:border-white/30 transition-all duration-300 group"
               >
-                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${tech.color} flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${tech.color} flex items-center justify-center text-2xl md:text-3xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   {tech.icon}
                 </div>
-                <h4 className="text-white font-bold text-lg mb-2">{tech.name}</h4>
-                <p className="text-blue-200 text-sm">{tech.desc}</p>
+                <h4 className="text-white font-bold text-base md:text-lg mb-2">{tech.name}</h4>
+                <p className="text-blue-200 text-xs md:text-sm">{tech.desc}</p>
               </motion.div>
             ))}
           </div>

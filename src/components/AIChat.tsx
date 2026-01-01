@@ -94,14 +94,14 @@ export function AIChat() {
     <>
       {/* 浮动按钮 */}
       <motion.div
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
       >
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-16 h-16 rounded-full shadow-premium-lg premium-button text-2xl"
+          className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-premium-lg premium-button text-xl md:text-2xl"
           aria-label="AI 客服"
         >
           {isOpen ? '✕' : '💬'}
@@ -112,21 +112,21 @@ export function AIChat() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-premium-lg z-50 flex flex-col overflow-hidden border border-gray-200"
+            className="fixed bottom-24 right-4 md:right-6 w-[calc(100vw-2rem)] md:w-96 h-[500px] max-h-[70vh] bg-white rounded-2xl shadow-premium-lg z-50 flex flex-col overflow-hidden border border-gray-200"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
             {/* 头部 */}
-            <div className="bg-gradient-to-r from-primary to-secondary p-4 text-white">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-xl">
+            <div className="bg-gradient-to-r from-primary to-secondary p-3 md:p-4 text-white">
+              <div className="flex items-center gap-2 md:gap-3">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-lg md:text-xl">
                   🤖
                 </div>
                 <div>
-                  <h3 className="font-bold">双铭策划 AI 助手</h3>
-                  <p className="text-xs text-white/80">智谱 GLM-4-Plus 驱动</p>
+                  <h3 className="font-bold text-sm md:text-base">双铭策划 AI 助手</h3>
+                  <p className="text-[10px] md:text-xs text-white/80">智谱 GLM-4-Plus 驱动</p>
                 </div>
               </div>
             </div>
@@ -176,25 +176,25 @@ export function AIChat() {
             </div>
 
             {/* 输入框 */}
-            <div className="p-4 bg-white border-t border-gray-200">
+            <div className="p-3 md:p-4 bg-white border-t border-gray-200">
               <div className="flex gap-2">
                 <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="输入您的问题..."
-                  className="flex-1"
+                  className="flex-1 text-sm md:text-base"
                   disabled={isLoading}
                 />
                 <Button
                   onClick={handleSend}
                   disabled={!input.trim() || isLoading}
-                  className="px-6"
+                  className="px-4 md:px-6 text-sm md:text-base"
                 >
                   发送
                 </Button>
               </div>
-              <p className="text-xs text-gray-400 mt-2 text-center">
+              <p className="text-[10px] md:text-xs text-gray-400 mt-2 text-center">
                 支持智能回复 · 24/7 在线服务
               </p>
             </div>
