@@ -4,6 +4,7 @@ import "./globals.css";
 import { TRPCProvider } from "@/lib/trpc/Provider";
 import { I18nProvider } from "@/lib/i18n/I18nContext";
 import { Navbar } from "@/components/Navbar";
+import { TopBanner } from "@/components/TopBanner";
 import { WebVitalsReporter } from "@/components/WebVitalsReporter";
 import { AIChat } from "@/components/AIChat";
 
@@ -41,7 +42,8 @@ export default function RootLayout({
           <TRPCProvider>
             <WebVitalsReporter />
             <Navbar />
-            <main className="pt-20">{children}</main>
+            <TopBanner />
+            <main className="pt-28">{children}</main>
             <Footer />
             <AIChat />
           </TRPCProvider>

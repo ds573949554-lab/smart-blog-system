@@ -72,9 +72,17 @@ export function AIChat() {
         }
         setMessages(prev => [...prev, assistantMessage])
       } else {
+        // 根据错误详情提供更准确的错误信息
+        let errorContent = t.chat.error;
+        if (data.details?.includes('余额不足') || data.details?.includes('balance')) {
+          errorContent = '抱歉，AI服务账户余额不足。请通过以下方式联系我们：\n📧 shuangmingd2@gmail.com\n🔗 LinkedIn: linkedin.com/in/shuangmingd2';
+        } else if (data.details?.includes('ZHIPU_API_KEY')) {
+          errorContent = '抱歉，AI服务暂时不可用。请通过邮件或LinkedIn联系我们的团队。';
+        }
+
         const errorMessage: Message = {
           role: 'assistant',
-          content: t.chat.error,
+          content: errorContent,
           timestamp: new Date()
         }
         setMessages(prev => [...prev, errorMessage])
