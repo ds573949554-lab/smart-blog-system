@@ -10,6 +10,7 @@ const navItems = [
   { name: '首页', href: '/' },
   { name: '关于我们', href: '/about' },
   { name: '服务项目', href: '/services' },
+  { name: 'AI 团队系统', href: '/ai-project' },
   { name: '成功案例', href: '/posts' },
   { name: '团队介绍', href: '/team' },
   { name: '联系我们', href: '/contact' },

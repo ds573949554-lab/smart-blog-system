@@ -178,15 +178,20 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
+                className="group"
               >
-                <Card className="h-full hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-muted/30">
+                <Card className="h-full premium-card shine-effect">
                   <CardContent className="p-8">
-                    <div
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-3xl mb-6 shadow-lg`}
+                    <motion.div
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-3xl mb-6 shadow-premium`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
                     >
                       {service.icon}
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+                    </motion.div>
+                    <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
+                      {service.title}
+                    </h3>
                     <p className="text-muted-foreground leading-relaxed">
                       {service.description}
                     </p>

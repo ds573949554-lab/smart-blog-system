@@ -77,6 +77,188 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+}
+
+/* 高端商业风格增强 */
+@layer utilities {
+  /* 玻璃态效果 */
+  .glass-effect {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20;
+  }
+
+  /* 高级渐变背景 */
+  .premium-gradient {
+    background: linear-gradient(135deg,
+      hsl(217 91% 60%) 0%,
+      hsl(258 90% 66%) 50%,
+      hsl(38 92% 50%) 100%);
+  }
+
+  .premium-gradient-dark {
+    background: linear-gradient(135deg,
+      hsl(222 84% 10%) 0%,
+      hsl(258 90% 15%) 50%,
+      hsl(217 91% 20%) 100%);
+  }
+
+  /* 高级阴影系统 */
+  .shadow-premium-sm {
+    box-shadow:
+      0 2px 8px -1px rgba(0, 0, 0, 0.08),
+      0 1px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-premium {
+    box-shadow:
+      0 10px 30px -5px rgba(0, 0, 0, 0.1),
+      0 4px 12px -2px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  .shadow-premium-lg {
+    box-shadow:
+      0 20px 50px -12px rgba(0, 0, 0, 0.15),
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  /* 光泽效果 */
+  .shine-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+    transition: left 0.5s ease;
+  }
+
+  .shine-effect:hover::before {
+    left: 100%;
+  }
+
+  /* 高级文字渐变 */
+  .text-premium-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg,
+      hsl(217 91% 60%),
+      hsl(258 90% 66%),
+      hsl(38 92% 50%));
+  }
+
+  /* 平滑滚动 */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+
+  /* 高级卡片 */
+  .premium-card {
+    @apply bg-white rounded-2xl shadow-premium hover:shadow-premium-lg
+           transition-all duration-300 border border-gray-100
+           hover:border-primary/30 hover:-translate-y-1;
+  }
+
+  /* 高级按钮 */
+  .premium-button {
+    @apply relative overflow-hidden font-semibold rounded-full
+           px-8 py-4 text-white shadow-premium
+           hover:shadow-premium-lg transition-all duration-300
+           hover:-translate-y-1 hover:scale-105;
+    background: linear-gradient(135deg, hsl(217 91% 60%), hsl(258 90% 66%));
+  }
+
+  .premium-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+    transition: left 0.5s ease;
+  }
+
+  .premium-button:hover::before {
+    left: 100%;
+  }
+}
+
+/* 全局动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 优化的字体渲染 */
+@supports (font-variation-settings: normal) {
+  body {
+    font-variation-settings: "wght" 400;
+  }
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(210 40% 96.1%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, hsl(217 91% 60%), hsl(258 90% 66%));
+  border-radius: 6px;
+  border: 3px solid hsl(210 40% 96.1%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, hsl(217 91% 50%), hsl(258 90% 56%));
 }
