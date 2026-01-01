@@ -63,7 +63,7 @@ export default function HomePage() {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10">
+      <section className="relative min-h-[70vh] md:min-h-[90vh] flex items-center justify-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 -left-48 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
@@ -78,14 +78,24 @@ export default function HomePage() {
           >
             <motion.div
               variants={fadeInUp}
-              className="inline-block mb-6 px-6 py-2 bg-primary/10 rounded-full text-primary font-semibold"
+              className="inline-block mb-4 px-6 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm md:text-base"
             >
               {t.home.heroTag}
             </motion.div>
 
+            {/* 小字公司名 - 解决手机端换行问题 */}
+            <motion.div
+              variants={fadeInUp}
+              className="mb-3 md:hidden"
+            >
+              <p className="text-lg font-black text-foreground tracking-wide" style={{ fontFamily: 'PingFang SC, Microsoft YaHei, sans-serif' }}>
+                双铭策划合伙公司
+              </p>
+            </motion.div>
+
             <motion.h1
               variants={fadeInUp}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
+              className="hidden md:block text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
             >
               {t.home.heroTitle}
             </motion.h1>

@@ -82,6 +82,55 @@
   }
 }
 
+/* 手机横屏适配 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  /* 减少导航栏高度 */
+  nav {
+    height: 60px !important;
+  }
+
+  nav .h-20 {
+    height: 60px !important;
+  }
+
+  /* 调整主内容顶部间距 */
+  main {
+    padding-top: 80px !important;
+  }
+
+  /* 压缩 Hero 区域 */
+  section {
+    min-height: 85vh !important;
+    padding: 1rem 0 !important;
+  }
+
+  /* 缩小文字和间距 */
+  h1 {
+    font-size: 1.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .text-xl, .text-2xl {
+    font-size: 0.875rem !important;
+  }
+
+  /* 压缩按钮 */
+  button, a {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  /* 减少卡片间距 */
+  .gap-8 {
+    gap: 1rem !important;
+  }
+
+  /* 压缩顶部横幅 */
+  .fixed.top-20 {
+    top: 60px !important;
+  }
+}
+
 /* 高端商业风格增强 */
 @layer utilities {
   /* 玻璃态效果 */
