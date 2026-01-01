@@ -85,7 +85,8 @@ export default function HomePage() {
 
             <motion.h1
               variants={fadeInUp}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent px-4 leading-tight"
+              style={{ wordBreak: 'keep-all', whiteSpace: 'nowrap' }}
             >
               {t.home.heroTitle}
             </motion.h1>
