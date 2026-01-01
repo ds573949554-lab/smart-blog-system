@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
+import { put } from '@vercel/blob';
 
 // 允许的文件类型
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'image/heic'];
@@ -8,7 +7,7 @@ const ALLOWED_VIDEO_TYPES = ['video/mp4', 'video/quicktime', 'video/x-msvideo'];
 
 // 最大文件大小
 const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
-const MAX_VIDEO_SIZE = 60 * 1024 * 1024; // 60MB (1分钟视频大约30-60MB)
+const MAX_VIDEO_SIZE = 60 * 1024 * 1024; // 60MB
 
 export async function POST(request: Request) {
   try {
@@ -23,14 +22,6 @@ export async function POST(request: Request) {
     }
 
     const uploadedUrls: string[] = [];
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-
-    // 确保上传目录存在
-    try {
-      await mkdir(uploadDir, { recursive: true });
-    } catch (error) {
-      // 目录已存在，忽略错误
-    }
 
     for (const file of files) {
       // 验证文件类型
@@ -58,17 +49,15 @@ export async function POST(request: Request) {
       // 生成唯一文件名
       const timestamp = Date.now();
       const random = Math.random().toString(36).substring(7);
-      const ext = path.extname(file.name);
-      const fileName = `${timestamp}-${random}${ext}`;
-      const filePath = path.join(uploadDir, fileName);
+      const ext = file.name.split('.').pop();
+      const fileName = `${timestamp}-${random}.${ext}`;
 
-      // 保存文件
-      const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-      await writeFile(filePath, buffer);
+      // 上传到 Vercel Blob
+      const blob = await put(fileName, file, {
+        access: 'public',
+      });
 
-      // 返回URL
-      uploadedUrls.push(`/uploads/${fileName}`);
+      uploadedUrls.push(blob.url);
     }
 
     return NextResponse.json({
