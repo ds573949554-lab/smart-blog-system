@@ -147,35 +147,67 @@ export function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          {/* Mobile Auth Button & Menu Button */}
+          <div className="lg:hidden flex items-center gap-2">
+            {/* 手机端登录按钮 */}
+            {status === 'loading' ? (
+              <div className="h-8 w-8 flex items-center justify-center">
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+              </div>
+            ) : session ? (
+              <Button
+                onClick={() => signOut()}
+                variant="ghost"
+                size="sm"
+                className="h-8 px-2 gap-1 text-sm"
+              >
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline">退出</span>
+              </Button>
+            ) : (
+              <Button
+                asChild
+                variant="default"
+                size="sm"
+                className="h-8 px-3 gap-1 shadow-md text-sm"
+              >
+                <Link href="/auth/signin">
+                  <LogIn className="h-4 w-4" />
+                  <span>登录</span>
+                </Link>
+              </Button>
+            )}
+
+            {/* 汉堡菜单按钮 */}
+            <button
+              className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {isMobileMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
