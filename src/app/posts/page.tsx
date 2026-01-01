@@ -35,13 +35,13 @@ export default function PostsPage() {
     <div className="container mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-4xl font-bold mb-2">博客文章</h1>
+          <h1 className="text-4xl font-bold mb-2">成功案例</h1>
           <p className="text-muted-foreground">
-            共 {posts?.length || 0} 篇文章
+            共 {posts?.length || 0} 个案例
           </p>
         </div>
         <Button asChild>
-          <Link href="/posts/new">写文章</Link>
+          <Link href="/posts/new">发布案例</Link>
         </Button>
       </div>
 
@@ -53,9 +53,9 @@ export default function PostsPage() {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-muted-foreground mb-4">还没有文章</p>
+          <p className="text-muted-foreground mb-4">还没有案例</p>
           <Button asChild>
-            <Link href="/posts/new">发布第一篇文章</Link>
+            <Link href="/posts/new">发布第一个案例</Link>
           </Button>
         </div>
       )}
