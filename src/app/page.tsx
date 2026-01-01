@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useI18n } from '@/lib/i18n/I18nContext';
 import { trpc } from '@/lib/trpc/client';
 import Image from 'next/image';
+import { useMemo } from 'react';
 import { Target, Palette, TrendingUp, Database, Lightbulb, Rocket, Zap } from 'lucide-react';
 
 // 服务和统计数据将从翻译系统动态获取
@@ -38,8 +39,8 @@ export default function HomePage() {
     digital: <Zap className="w-8 h-8" />,
   };
 
-  // 动态获取服务数据
-  const services = [
+  // 使用 useMemo 确保服务数据在语言切换时重新计算
+  const services = useMemo(() => [
     {
       title: t.services.strategy.title,
       description: t.services.strategy.description,
@@ -64,14 +65,15 @@ export default function HomePage() {
       icon: serviceIcons.digital,
       color: 'from-green-500 to-emerald-500',
     },
-  ];
+  ], [t]);
 
-  const stats = [
+  // 使用 useMemo 确保统计数据在语言切换时重新计算
+  const stats = useMemo(() => [
     { value: '100+', label: t.home.stats.clients },
     { value: '200+', label: t.home.stats.cases },
     { value: '98%', label: t.home.stats.satisfaction },
     { value: '5年+', label: t.home.stats.experience },
-  ];
+  ], [t]);
 
   return (
     <div className="overflow-hidden">

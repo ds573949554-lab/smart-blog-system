@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useI18n } from '@/lib/i18n/I18nContext';
+import { useMemo } from 'react';
 import { Target, Palette, TrendingUp, Zap } from 'lucide-react';
 
 export default function ServicesPage() {
@@ -18,8 +19,8 @@ export default function ServicesPage() {
     digital: <Zap className="w-8 h-8" />,
   };
 
-  // 动态获取服务数据
-  const services = [
+  // 使用 useMemo 确保服务数据在语言切换时重新计算
+  const services = useMemo(() => [
     {
       id: 'strategy',
       title: t.services.strategy.title,
@@ -52,7 +53,7 @@ export default function ServicesPage() {
       color: 'from-green-500 to-emerald-500',
       features: t.services.digital.features,
     },
-  ];
+  ], [t]);
 
   const process = t.services.process;
 
